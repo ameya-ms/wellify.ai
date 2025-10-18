@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Clock, MapPin, Stethoscope, AlertCircle, Car, Activity, Thermometer, Heart, Brain } from "lucide-react";
+import { useState, useRef } from "react";
+import { Clock, MapPin, Stethoscope, AlertCircle, Car, Activity, Thermometer, Heart, Brain, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -26,6 +26,9 @@ const symptomCategories = [
 const Symptoms = () => {
   const [symptoms, setSymptoms] = useState<string[]>([]);
   const [showResults, setShowResults] = useState(false);
+  const [showCustomInput, setShowCustomInput] = useState(false);
+  const [customSymptom, setCustomSymptom] = useState("");
+  const customInputRef = useRef<HTMLInputElement>(null);
 
   const facilities: Facility[] = [
     {
@@ -71,6 +74,20 @@ const Symptoms = () => {
     setShowResults(true);
   };
 
+  const handleAddCustomSymptom = () => {
+    if (customSymptom.trim()) {
+      setSymptoms([...symptoms, customSymptom.trim()]);
+      setCustomSymptom("");
+      setShowCustomInput(false);
+    }
+  };
+
+  const handleCustomInputKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      handleAddCustomSymptom();
+    }
+  };
+
   const getSeverityColor = (severity: string) => {
     switch (severity) {
       case "low":
@@ -104,26 +121,35 @@ const Symptoms = () => {
               </div>
             </div>
 
-            {/* Search */}
+            {/* Search and Symptom Selection Combined */}
             <Card className="shadow-xl border-border/50 backdrop-blur-sm">
-              <CardContent className="p-6">
-                <SymptomSearch onSymptomChange={setSymptoms} />
-              </CardContent>
-            </Card>
+              <CardContent className="p-6 space-y-6">
+                {/* Search Bar */}
+                <div>
+                  <SymptomSearch onSymptomChange={setSymptoms} />
+                </div>
 
-            {/* Multiselect Symptom Table */}
-            <div className="space-y-4">
-              <h2 className="text-xl font-semibold text-foreground text-center">
-                Select Your Symptoms
-              </h2>
-              <Card className="shadow-xl border-border/50 backdrop-blur-sm">
-                <CardContent className="p-6">
+                {/* Divider */}
+                <div className="relative">
+                  <div className="absolute inset-0 flex items-center">
+                    <span className="w-full border-t border-border" />
+                  </div>
+                  <div className="relative flex justify-center text-xs uppercase">
+                    <span className="bg-card px-2 text-muted-foreground">or select below</span>
+                  </div>
+                </div>
+
+                {/* Multiselect Symptom Grid */}
+                <div className="space-y-3">
+                  <h3 className="text-sm font-semibold text-foreground">
+                    Select Your Symptoms
+                  </h3>
                   <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
                     {[
                       "Fever", "Cough", "Headache", "Sore Throat", 
                       "Nausea", "Fatigue", "Body Aches", "Chills",
                       "Congestion", "Runny Nose", "Sneezing", "Dizziness",
-                      "Shortness of Breath", "Chest Pain", "Stomach Pain", "Diarrhea"
+                      "Shortness of Breath", "Chest Pain", "Stomach Pain"
                     ].map((symptom) => (
                       <button
                         key={symptom}
@@ -143,10 +169,47 @@ const Symptoms = () => {
                         {symptom}
                       </button>
                     ))}
+                    
+                    {/* Add Custom Symptom Button/Input */}
+                    {!showCustomInput ? (
+                      <button
+                        onClick={() => {
+                          setShowCustomInput(true);
+                          setTimeout(() => customInputRef.current?.focus(), 100);
+                        }}
+                        className="p-3 rounded-lg border-2 border-dashed border-primary/50 text-sm font-medium transition-all duration-200 bg-card text-primary hover:border-primary hover:bg-primary/5 flex items-center justify-center gap-2"
+                      >
+                        <Plus className="w-4 h-4" />
+                        Add Symptom
+                      </button>
+                    ) : (
+                      <div className="p-2 rounded-lg border-2 border-primary bg-card flex items-center gap-2">
+                        <input
+                          ref={customInputRef}
+                          type="text"
+                          value={customSymptom}
+                          onChange={(e) => setCustomSymptom(e.target.value)}
+                          onKeyDown={handleCustomInputKeyDown}
+                          onBlur={() => {
+                            if (!customSymptom.trim()) {
+                              setShowCustomInput(false);
+                            }
+                          }}
+                          placeholder="Enter symptom..."
+                          className="flex-1 bg-transparent text-sm outline-none text-foreground placeholder:text-muted-foreground"
+                        />
+                        <button
+                          onClick={handleAddCustomSymptom}
+                          className="text-primary hover:text-primary/80"
+                        >
+                          <Plus className="w-4 h-4" />
+                        </button>
+                      </div>
+                    )}
                   </div>
-                </CardContent>
-              </Card>
-            </div>
+                </div>
+              </CardContent>
+            </Card>
 
             {/* Quick Categories */}
             <div className="space-y-4">
