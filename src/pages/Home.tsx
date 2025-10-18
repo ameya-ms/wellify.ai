@@ -3,6 +3,7 @@ import { Activity, Clock, Heart, Shield } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import heroImage from "@/assets/hero-image.jpg";
+import uwLogo from "@/assets/uw-logo.png";
 
 const Home = () => {
   const features = [
@@ -32,12 +33,16 @@ const Home = () => {
     <div className="min-h-screen">
       {/* Hero Section */}
       <section className="relative pt-24 pb-20 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-hero opacity-5" />
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5 animate-gradient-shift" style={{ backgroundSize: "200% 200%" }} />
         <div className="container mx-auto px-4 relative">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div className="space-y-8">
+            <div className="space-y-8 animate-fade-in-up">
+              <div className="flex items-center gap-3 mb-4">
+                <img src={uwLogo} alt="UW Logo" className="w-16 h-16 animate-scale-in" />
+                <span className="text-lg font-semibold text-muted-foreground">University of Washington</span>
+              </div>
               <div className="space-y-4">
-                <h1 className="text-5xl md:text-6xl font-bold text-primary leading-tight">
+                <h1 className="text-5xl md:text-6xl font-bold text-foreground leading-tight">
                   Making Being Sick Easier at UW
                 </h1>
                 <p className="text-xl text-muted-foreground">
@@ -57,12 +62,12 @@ const Home = () => {
                 </Link>
               </div>
             </div>
-            <div className="relative">
-              <div className="absolute -inset-4 bg-gradient-hero opacity-20 blur-3xl rounded-full" />
+            <div className="relative animate-fade-in" style={{ animationDelay: "200ms" }}>
+              <div className="absolute -inset-4 bg-primary/20 blur-3xl rounded-full animate-pulse" />
               <img 
                 src={heroImage}
                 alt="Happy UW students feeling better"
-                className="relative rounded-2xl shadow-2xl w-full h-auto"
+                className="relative rounded-2xl shadow-2xl w-full h-auto transform hover:scale-105 transition-transform duration-500"
               />
             </div>
           </div>
@@ -79,10 +84,14 @@ const Home = () => {
             </p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {features.map(({ icon: Icon, title, description }) => (
-              <Card key={title} className="border-border hover:shadow-lg transition-all duration-300 hover:-translate-y-1 bg-card">
+            {features.map(({ icon: Icon, title, description }, index) => (
+              <Card 
+                key={title} 
+                className="border-border hover:shadow-lg transition-all duration-300 hover:-translate-y-2 bg-card/50 backdrop-blur-sm animate-fade-in-up group"
+                style={{ animationDelay: `${index * 100}ms` }}
+              >
                 <CardContent className="p-6 space-y-4">
-                  <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
+                  <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center group-hover:scale-110 transition-transform">
                     <Icon className="w-6 h-6 text-primary" />
                   </div>
                   <h3 className="text-xl font-semibold text-foreground">{title}</h3>

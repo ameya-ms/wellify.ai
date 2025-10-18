@@ -2,6 +2,12 @@ import { Package, Pill, ShoppingBag, Truck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import chickenSoup from "@/assets/chicken-soup.jpg";
+import gingerTea from "@/assets/ginger-tea.jpg";
+import tissues from "@/assets/tissues.jpg";
+import thermometer from "@/assets/thermometer.jpg";
+import orangeJuice from "@/assets/orange-juice.jpg";
+import vitamins from "@/assets/vitamins.jpg";
 
 const Meds = () => {
   const prescriptions = [
@@ -22,20 +28,20 @@ const Meds = () => {
   ];
 
   const comfortItems = [
-    { name: "Chicken Noodle Soup", category: "Food", icon: "🍲" },
-    { name: "Ginger Tea", category: "Beverages", icon: "🍵" },
-    { name: "Tissues (3-pack)", category: "Essentials", icon: "🧻" },
-    { name: "Digital Thermometer", category: "Medical", icon: "🌡️" },
-    { name: "Honey", category: "Food", icon: "🍯" },
-    { name: "Vitamin C", category: "Supplements", icon: "💊" },
+    { name: "Chicken Noodle Soup", category: "Food", image: chickenSoup },
+    { name: "Ginger Tea", category: "Beverages", image: gingerTea },
+    { name: "Tissues (3-pack)", category: "Essentials", image: tissues },
+    { name: "Digital Thermometer", category: "Medical", image: thermometer },
+    { name: "Orange Juice", category: "Beverages", image: orangeJuice },
+    { name: "Vitamin C", category: "Supplements", image: vitamins },
   ];
 
   return (
     <div className="min-h-screen pt-24 pb-12">
       <div className="container mx-auto px-4 max-w-6xl">
         {/* Header */}
-        <div className="text-center mb-12 space-y-4">
-          <h1 className="text-4xl md:text-5xl font-bold text-primary">
+        <div className="text-center mb-12 space-y-4 animate-fade-in-up">
+          <h1 className="text-4xl md:text-5xl font-bold text-foreground">
             Medications & Supplies
           </h1>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
@@ -50,8 +56,12 @@ const Meds = () => {
             <h2 className="text-2xl font-semibold text-foreground">Your Prescriptions</h2>
           </div>
           <div className="grid gap-4">
-            {prescriptions.map((rx) => (
-              <Card key={rx.id} className="border-border hover:shadow-lg transition-all">
+            {prescriptions.map((rx, index) => (
+              <Card 
+                key={rx.id} 
+                className="border-border hover:shadow-lg transition-all animate-fade-in-up"
+                style={{ animationDelay: `${index * 100}ms` }}
+              >
                 <CardContent className="p-6">
                   <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                     <div className="space-y-2 flex-1">
@@ -100,10 +110,20 @@ const Meds = () => {
             </CardHeader>
             <CardContent>
               <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                {comfortItems.map((item) => (
-                  <Card key={item.name} className="border-border hover:shadow-md transition-all">
+                {comfortItems.map((item, index) => (
+                  <Card 
+                    key={item.name} 
+                    className="border-border hover:shadow-md transition-all overflow-hidden group animate-fade-in-up hover:scale-105"
+                    style={{ animationDelay: `${index * 100}ms` }}
+                  >
                     <CardContent className="p-4 space-y-3">
-                      <div className="text-4xl text-center">{item.icon}</div>
+                      <div className="aspect-square rounded-lg overflow-hidden bg-muted">
+                        <img 
+                          src={item.image} 
+                          alt={item.name}
+                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                        />
+                      </div>
                       <div className="space-y-1 text-center">
                         <h3 className="font-semibold text-foreground">{item.name}</h3>
                         <Badge variant="secondary" className="text-xs">

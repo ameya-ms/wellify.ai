@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { Building2, Clock, MapPin, Stethoscope, AlertCircle, Car } from "lucide-react";
+import { Clock, MapPin, Stethoscope, AlertCircle, Car, Activity, Thermometer, Heart, Brain } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
+import { SymptomSearch } from "@/components/SymptomSearch";
 
 interface Facility {
   id: string;
@@ -16,8 +16,15 @@ interface Facility {
   distance: string;
 }
 
+const symptomCategories = [
+  { icon: Thermometer, label: "Fever & Chills", color: "bg-destructive/10 text-destructive border-destructive/20" },
+  { icon: Activity, label: "Respiratory", color: "bg-primary/10 text-primary border-primary/20" },
+  { icon: Heart, label: "Digestive", color: "bg-accent/10 text-accent-foreground border-accent/30" },
+  { icon: Brain, label: "Neurological", color: "bg-success/10 text-success border-success/20" },
+];
+
 const Symptoms = () => {
-  const [symptoms, setSymptoms] = useState("");
+  const [symptoms, setSymptoms] = useState<string[]>([]);
   const [showResults, setShowResults] = useState(false);
 
   const facilities: Facility[] = [
@@ -53,8 +60,14 @@ const Symptoms = () => {
     },
   ];
 
-  const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleContinue = () => {
+    if (symptoms.length > 0) {
+      setShowResults(true);
+    }
+  };
+
+  const handleCategoryClick = (category: string) => {
+    setSymptoms([category]);
     setShowResults(true);
   };
 
@@ -74,45 +87,75 @@ const Symptoms = () => {
   return (
     <div className="min-h-screen pt-24 pb-12">
       <div className="container mx-auto px-4 max-w-5xl">
-        {/* Header */}
-        <div className="text-center mb-12 space-y-4">
-          <h1 className="text-4xl md:text-5xl font-bold text-primary">
-            Check Your Symptoms
-          </h1>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Tell us what's wrong, and we'll show you exactly where to go.
-          </p>
-        </div>
+        {!showResults ? (
+          <div className="space-y-8 animate-fade-in-up">
+            {/* Header */}
+            <div className="text-center space-y-4">
+              <h1 className="text-4xl md:text-5xl font-bold text-foreground">
+                What are your symptoms?
+              </h1>
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                Tell us what you're experiencing, and we'll recommend the best care option for you.
+              </p>
+            </div>
 
-        {/* Search Form */}
-        <Card className="mb-12 shadow-lg border-border">
-          <CardContent className="p-6">
-            <form onSubmit={handleSearch} className="space-y-4">
-              <div>
-                <label htmlFor="symptoms" className="block text-sm font-medium text-foreground mb-2">
-                  What symptoms are you experiencing?
-                </label>
-                <Input
-                  id="symptoms"
-                  type="text"
-                  placeholder="e.g., sore throat, fever, headache..."
-                  value={symptoms}
-                  onChange={(e) => setSymptoms(e.target.value)}
-                  className="text-lg h-12"
-                />
+            {/* Search */}
+            <Card className="shadow-xl border-border/50 backdrop-blur-sm">
+              <CardContent className="p-6">
+                <SymptomSearch onSymptomChange={setSymptoms} />
+              </CardContent>
+            </Card>
+
+            {/* Quick Categories */}
+            <div className="space-y-4">
+              <h2 className="text-xl font-semibold text-foreground text-center">
+                Or select a category
+              </h2>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                {symptomCategories.map((category, index) => (
+                  <button
+                    key={category.label}
+                    onClick={() => handleCategoryClick(category.label)}
+                    className="group relative overflow-hidden rounded-xl p-6 border-2 hover:scale-105 transition-all duration-300 animate-scale-in bg-card hover:shadow-xl"
+                    style={{ animationDelay: `${index * 100}ms` }}
+                  >
+                    <div className="flex flex-col items-center gap-3 relative z-10">
+                      <category.icon className="h-8 w-8 text-primary group-hover:scale-110 transition-transform" />
+                      <span className="text-sm font-medium text-foreground text-center">
+                        {category.label}
+                      </span>
+                    </div>
+                    <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                  </button>
+                ))}
               </div>
-              <Button type="submit" size="lg" className="w-full bg-primary hover:bg-primary-light">
-                Find Care Options
-              </Button>
-            </form>
-          </CardContent>
-        </Card>
+            </div>
 
-        {/* Results */}
-        {showResults && (
-          <div className="space-y-8">
-            {/* Emergency Alert (conditional) */}
-            <Card className="border-destructive bg-destructive/5">
+            {/* Continue Button */}
+            <div className="flex justify-center">
+              <Button
+                onClick={handleContinue}
+                disabled={symptoms.length === 0}
+                size="lg"
+                className="px-12 py-6 text-lg hover:scale-105 transition-transform"
+              >
+                Continue to Results
+              </Button>
+            </div>
+          </div>
+        ) : (
+          <div className="space-y-8 animate-fade-in">
+            {/* Back button */}
+            <Button
+              variant="outline"
+              onClick={() => setShowResults(false)}
+              className="mb-4"
+            >
+              ← Back to Search
+            </Button>
+
+            {/* Emergency Alert */}
+            <Card className="border-destructive bg-destructive/5 animate-scale-in">
               <CardContent className="p-6 flex items-start gap-4">
                 <AlertCircle className="w-6 h-6 text-destructive mt-1 flex-shrink-0" />
                 <div className="space-y-2">
@@ -134,12 +177,16 @@ const Symptoms = () => {
                 Recommended Care Options
               </h2>
               <div className="grid gap-6">
-                {facilities.map((facility) => (
-                  <Card key={facility.id} className="hover:shadow-xl transition-all duration-300 border-border">
+                {facilities.map((facility, index) => (
+                  <Card
+                    key={facility.id}
+                    className="hover:shadow-2xl transition-all duration-300 border-border/50 backdrop-blur-sm animate-fade-in-up"
+                    style={{ animationDelay: `${index * 100}ms` }}
+                  >
                     <CardHeader className="pb-4">
                       <div className="flex items-start justify-between">
                         <div className="space-y-2">
-                          <CardTitle className="text-2xl text-primary">
+                          <CardTitle className="text-2xl text-foreground">
                             {facility.name}
                           </CardTitle>
                           <div className="flex items-center gap-2 text-muted-foreground">
@@ -155,14 +202,14 @@ const Symptoms = () => {
                     </CardHeader>
                     <CardContent className="space-y-4">
                       <div className="grid md:grid-cols-2 gap-4">
-                        <div className="flex items-center gap-3 p-3 bg-secondary/50 rounded-lg">
+                        <div className="flex items-center gap-3 p-3 bg-muted/50 rounded-lg">
                           <Clock className="w-5 h-5 text-primary" />
                           <div>
                             <div className="text-xs text-muted-foreground">Wait Time</div>
                             <div className="font-semibold text-foreground">{facility.waitTime}</div>
                           </div>
                         </div>
-                        <div className="flex items-center gap-3 p-3 bg-secondary/50 rounded-lg">
+                        <div className="flex items-center gap-3 p-3 bg-muted/50 rounded-lg">
                           <Stethoscope className="w-5 h-5 text-primary" />
                           <div>
                             <div className="text-xs text-muted-foreground">Specialty</div>
@@ -183,15 +230,15 @@ const Symptoms = () => {
                       </div>
 
                       <div className="flex gap-3 pt-2">
-                        <Button className="flex-1 bg-[#000000] hover:bg-[#000000]/90 text-white">
+                        <Button className="flex-1 bg-[hsl(0_0%_0%)] hover:bg-[hsl(0_0%_10%)] text-white">
                           <Car className="w-4 h-4 mr-2" />
                           Request Uber
                         </Button>
-                        <Button className="flex-1 bg-[#FF00BF] hover:bg-[#FF00BF]/90 text-white">
+                        <Button className="flex-1 bg-[hsl(330_100%_50%)] hover:bg-[hsl(330_100%_40%)] text-white">
                           <Car className="w-4 h-4 mr-2" />
                           Request Lyft
                         </Button>
-                        <Button variant="outline" className="border-primary text-primary hover:bg-primary-lighter/50">
+                        <Button variant="outline" className="border-primary text-primary hover:bg-primary/10">
                           <MapPin className="w-4 h-4 mr-2" />
                           Directions
                         </Button>
