@@ -8,7 +8,7 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* Modern Dark Purple Theme */
+    /* Modern Dark Purple & Blue Theme */
     --background: 260 40% 8%;
     --foreground: 0 0% 98%;
 
@@ -33,6 +33,13 @@ All colors MUST be HSL.
     --accent-foreground: 0 0% 100%;
     --accent-light: 280 85% 75%;
     --accent-lighter: 280 50% 20%;
+
+    /* Blue Accent Colors */
+    --blue: 210 100% 55%; /* Vibrant Blue */
+    --blue-foreground: 0 0% 100%;
+    --blue-light: 210 100% 65%;
+    --blue-dark: 210 100% 45%;
+    --blue-lighter: 210 80% 25%;
 
     --destructive: 0 75% 60%;
     --destructive-foreground: 0 0% 100%;

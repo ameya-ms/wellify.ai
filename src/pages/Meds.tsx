@@ -1,7 +1,10 @@
-import { Package, Pill, ShoppingBag, Truck } from "lucide-react";
+import { Package, Pill, ShoppingBag, Truck, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import { useState } from "react";
+import { cn } from "@/lib/utils";
 import chickenSoup from "@/assets/chicken-soup.jpg";
 import gingerTea from "@/assets/ginger-tea.jpg";
 import tissues from "@/assets/tissues.jpg";
@@ -10,6 +13,7 @@ import orangeJuice from "@/assets/orange-juice.jpg";
 import vitamins from "@/assets/vitamins.jpg";
 
 const Meds = () => {
+  const [expandedRx, setExpandedRx] = useState<string | null>(null);
   const prescriptions = [
     {
       id: "1",
@@ -81,15 +85,81 @@ const Meds = () => {
                         </div>
                       </div>
                     </div>
-                    <div className="flex gap-3">
-                      <Button className="bg-[#FF9900] hover:bg-[#FF9900]/90 text-white">
-                        <Package className="w-4 h-4 mr-2" />
-                        Amazon Pharmacy
-                      </Button>
-                      <Button className="bg-[#CC0000] hover:bg-[#CC0000]/90 text-white">
-                        <Truck className="w-4 h-4 mr-2" />
-                        CVS
-                      </Button>
+                    <div className="flex flex-col gap-2 md:w-auto w-full">
+                      <Collapsible open={expandedRx === `${rx.id}-amazon`} onOpenChange={(open) => setExpandedRx(open ? `${rx.id}-amazon` : null)}>
+                        <CollapsibleTrigger asChild>
+                          <Button className="bg-[#FF9900] hover:bg-[#FF9900]/90 text-white w-full justify-between">
+                            <div className="flex items-center">
+                              <Package className="w-4 h-4 mr-2" />
+                              Amazon Pharmacy
+                            </div>
+                            <ChevronDown className={cn("w-4 h-4 transition-transform", expandedRx === `${rx.id}-amazon` && "rotate-180")} />
+                          </Button>
+                        </CollapsibleTrigger>
+                        <CollapsibleContent className="mt-2 p-4 bg-card/50 rounded-lg border border-border">
+                          <div className="space-y-3">
+                            <div className="flex items-center justify-between">
+                              <span className="text-sm font-semibold text-foreground">Amazon Pharmacy</span>
+                              <Badge className="bg-[#FF9900] text-white">Prime Eligible</Badge>
+                            </div>
+                            <div className="space-y-2 text-sm">
+                              <div className="flex justify-between">
+                                <span className="text-muted-foreground">Price:</span>
+                                <span className="font-medium text-foreground">{rx.copay}</span>
+                              </div>
+                              <div className="flex justify-between">
+                                <span className="text-muted-foreground">Delivery:</span>
+                                <span className="font-medium text-success">FREE 1-2 Day Shipping</span>
+                              </div>
+                            </div>
+                            <Button className="w-full bg-[#FFD814] hover:bg-[#FFD814]/90 text-black font-semibold">
+                              Add to Amazon Cart
+                            </Button>
+                          </div>
+                        </CollapsibleContent>
+                      </Collapsible>
+
+                      <Collapsible open={expandedRx === `${rx.id}-walgreens`} onOpenChange={(open) => setExpandedRx(open ? `${rx.id}-walgreens` : null)}>
+                        <CollapsibleTrigger asChild>
+                          <Button className="bg-[#E31837] hover:bg-[#E31837]/90 text-white w-full justify-between">
+                            <div className="flex items-center">
+                              <Truck className="w-4 h-4 mr-2" />
+                              Walgreens
+                            </div>
+                            <ChevronDown className={cn("w-4 h-4 transition-transform", expandedRx === `${rx.id}-walgreens` && "rotate-180")} />
+                          </Button>
+                        </CollapsibleTrigger>
+                        <CollapsibleContent className="mt-2 p-4 bg-card/50 rounded-lg border border-border">
+                          <div className="space-y-3">
+                            <div className="flex items-center justify-between">
+                              <span className="text-sm font-semibold text-foreground">Walgreens Pharmacy</span>
+                              <Badge className="bg-[#E31837] text-white">myWalgreens</Badge>
+                            </div>
+                            <div className="space-y-2 text-sm">
+                              <div className="flex justify-between">
+                                <span className="text-muted-foreground">Price:</span>
+                                <span className="font-medium text-foreground">{rx.copay}</span>
+                              </div>
+                              <div className="flex justify-between">
+                                <span className="text-muted-foreground">Pickup:</span>
+                                <span className="font-medium text-[hsl(var(--blue))]">Ready in 1 hour</span>
+                              </div>
+                              <div className="flex justify-between">
+                                <span className="text-muted-foreground">Delivery:</span>
+                                <span className="font-medium text-success">Same-day available</span>
+                              </div>
+                            </div>
+                            <div className="grid grid-cols-2 gap-2">
+                              <Button className="bg-[#E31837] hover:bg-[#E31837]/90 text-white font-semibold">
+                                Order Pickup
+                              </Button>
+                              <Button variant="outline" className="border-[#E31837] text-[#E31837] hover:bg-[#E31837]/10 font-semibold">
+                                Delivery
+                              </Button>
+                            </div>
+                          </div>
+                        </CollapsibleContent>
+                      </Collapsible>
                     </div>
                   </div>
                 </CardContent>
@@ -101,7 +171,7 @@ const Meds = () => {
         {/* Comfort Items Section */}
         <div>
           <div className="flex items-center gap-3 mb-6">
-            <ShoppingBag className="w-6 h-6 text-primary" />
+            <ShoppingBag className="w-6 h-6 text-[hsl(var(--blue))]" />
             <h2 className="text-2xl font-semibold text-foreground">Comfort & Supplies</h2>
           </div>
           <Card className="border-border">
