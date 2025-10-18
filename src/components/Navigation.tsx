@@ -1,7 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
 import { Activity, Home, Pill, Shield } from "lucide-react";
 import { cn } from "@/lib/utils";
-import uwLogo from "@/assets/uw-logo.png";
+import uwLogo from "@/assets/uw-logo-transparent.png";
 
 const Navigation = () => {
   const location = useLocation();

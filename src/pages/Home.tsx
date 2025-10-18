@@ -1,9 +1,13 @@
 import { Link } from "react-router-dom";
-import { Activity, Clock, Heart, Shield } from "lucide-react";
+import { Activity, Clock, Heart, Shield, ArrowRight, Zap, CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { ScrollReveal } from "@/components/ScrollReveal";
 import heroImage from "@/assets/hero-image.jpg";
-import uwLogo from "@/assets/uw-logo.png";
+import uwLogo from "@/assets/uw-logo-transparent.png";
+import hallHealthExterior from "@/assets/hall-health-exterior.jpg";
+import studentsApp from "@/assets/students-app.jpg";
+import doctorConsultation from "@/assets/doctor-consultation.jpg";
 
 const Home = () => {
   const features = [
@@ -29,6 +33,21 @@ const Home = () => {
     },
   ];
 
+  const benefits = [
+    {
+      icon: Zap,
+      title: "Instant Symptom Analysis",
+      description: "Our AI analyzes your symptoms in seconds and recommends the best care facility for your needs.",
+      image: studentsApp,
+    },
+    {
+      icon: CheckCircle,
+      title: "Professional Medical Support",
+      description: "Connect with UW healthcare professionals who understand student life and health challenges.",
+      image: doctorConsultation,
+    },
+  ];
+
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
@@ -36,40 +55,46 @@ const Home = () => {
         <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-accent/10 animate-gradient-shift" style={{ backgroundSize: "200% 200%" }} />
         <div className="container mx-auto px-4 relative">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div className="space-y-8 animate-fade-in-up">
-              <div className="flex items-center gap-3 mb-4">
-                <img src={uwLogo} alt="UW Logo" className="w-16 h-16 animate-scale-in" />
-                <span className="text-lg font-semibold text-muted-foreground">University of Washington</span>
+            <ScrollReveal direction="left">
+              <div className="space-y-8">
+                <div className="flex items-center gap-3 mb-4">
+                  <img src={uwLogo} alt="UW Logo" className="w-16 h-16" />
+                  <span className="text-lg font-semibold text-muted-foreground">University of Washington</span>
+                </div>
+                <div className="space-y-4">
+                  <h1 className="text-5xl md:text-6xl font-bold text-foreground leading-tight">
+                    Making Being Sick Easier at UW
+                  </h1>
+                  <p className="text-xl text-muted-foreground">
+                    Navigate healthcare with confidence. Find care, order meds, and understand your insurance—all in one place.
+                  </p>
+                </div>
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <Link to="/symptoms">
+                    <Button size="lg" className="w-full sm:w-auto shadow-lg hover:shadow-primary/50 hover:scale-105 transition-all group">
+                      Check Your Symptoms
+                      <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    </Button>
+                  </Link>
+                  <Link to="/insurance">
+                    <Button size="lg" variant="outline" className="w-full sm:w-auto border-primary/50 text-foreground hover:bg-primary/10 hover:border-primary">
+                      Insurance Help
+                    </Button>
+                  </Link>
+                </div>
               </div>
-              <div className="space-y-4">
-                <h1 className="text-5xl md:text-6xl font-bold text-foreground leading-tight">
-                  Making Being Sick Easier at UW
-                </h1>
-                <p className="text-xl text-muted-foreground">
-                  Navigate healthcare with confidence. Find care, order meds, and understand your insurance—all in one place.
-                </p>
+            </ScrollReveal>
+
+            <ScrollReveal direction="right" delay={200}>
+              <div className="relative">
+                <div className="absolute -inset-4 bg-primary/20 blur-3xl rounded-full animate-pulse" />
+                <img 
+                  src={heroImage}
+                  alt="Happy UW students feeling better"
+                  className="relative rounded-2xl shadow-2xl w-full h-auto transform hover:scale-105 transition-transform duration-500"
+                />
               </div>
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Link to="/symptoms">
-                  <Button size="lg" className="w-full sm:w-auto bg-primary hover:bg-primary-light shadow-lg hover:shadow-xl transition-all">
-                    Check Your Symptoms
-                  </Button>
-                </Link>
-                <Link to="/insurance">
-                  <Button size="lg" variant="outline" className="w-full sm:w-auto border-primary text-primary hover:bg-primary-lighter/50">
-                    Insurance Help
-                  </Button>
-                </Link>
-              </div>
-            </div>
-            <div className="relative animate-fade-in" style={{ animationDelay: "200ms" }}>
-              <div className="absolute -inset-4 bg-primary/20 blur-3xl rounded-full animate-pulse" />
-              <img 
-                src={heroImage}
-                alt="Happy UW students feeling better"
-                className="relative rounded-2xl shadow-2xl w-full h-auto transform hover:scale-105 transition-transform duration-500"
-              />
-            </div>
+            </ScrollReveal>
           </div>
         </div>
       </section>
@@ -77,27 +102,126 @@ const Home = () => {
       {/* Features Section */}
       <section className="py-20 bg-muted/30">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12 space-y-4">
-            <h2 className="text-4xl font-bold text-primary">How We Help</h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              We've simplified the confusing parts of being sick so you can focus on feeling better.
-            </p>
-          </div>
+          <ScrollReveal>
+            <div className="text-center mb-12 space-y-4">
+              <h2 className="text-4xl font-bold text-foreground">How We Help</h2>
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                We've simplified the confusing parts of being sick so you can focus on feeling better.
+              </p>
+            </div>
+          </ScrollReveal>
+
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {features.map(({ icon: Icon, title, description }, index) => (
-              <Card 
-                key={title} 
-                className="border-border/50 hover:border-primary/50 hover:shadow-2xl hover:shadow-primary/20 transition-all duration-300 hover:-translate-y-2 bg-card/80 backdrop-blur-sm animate-fade-in-up group"
-                style={{ animationDelay: `${index * 100}ms` }}
-              >
-                <CardContent className="p-6 space-y-4">
-                  <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center group-hover:scale-110 transition-transform">
-                    <Icon className="w-6 h-6 text-primary" />
+              <ScrollReveal key={title} delay={index * 100} direction="up">
+                <Card className="border-border/50 hover:border-primary/50 hover:shadow-2xl hover:shadow-primary/20 transition-all duration-300 hover:-translate-y-2 bg-card/80 backdrop-blur-sm group h-full">
+                  <CardContent className="p-6 space-y-4">
+                    <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center group-hover:scale-110 transition-transform">
+                      <Icon className="w-6 h-6 text-primary" />
+                    </div>
+                    <h3 className="text-xl font-semibold text-foreground">{title}</h3>
+                    <p className="text-muted-foreground">{description}</p>
+                  </CardContent>
+                </Card>
+              </ScrollReveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Hall Health Section */}
+      <section className="py-20 bg-background">
+        <div className="container mx-auto px-4">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <ScrollReveal direction="left">
+              <div className="relative">
+                <div className="absolute -inset-4 bg-accent/20 blur-3xl rounded-full" />
+                <img 
+                  src={hallHealthExterior}
+                  alt="Hall Health Center exterior"
+                  className="relative rounded-2xl shadow-2xl w-full h-auto"
+                />
+              </div>
+            </ScrollReveal>
+
+            <ScrollReveal direction="right" delay={200}>
+              <div className="space-y-6">
+                <div className="inline-block px-4 py-2 bg-primary/10 rounded-full">
+                  <span className="text-primary font-semibold">On-Campus Care</span>
+                </div>
+                <h2 className="text-4xl font-bold text-foreground">
+                  Your Health, Steps Away
+                </h2>
+                <p className="text-lg text-muted-foreground">
+                  Hall Health Center is right on campus, making it easy to get the care you need without disrupting your schedule. From cold and flu to mental health support, we're here for you.
+                </p>
+                <ul className="space-y-3">
+                  {[
+                    "Walk-in appointments available",
+                    "Same-day urgent care",
+                    "Mental health counseling",
+                    "Pharmacy on-site"
+                  ].map((item, index) => (
+                    <li key={index} className="flex items-center gap-3 text-foreground">
+                      <div className="w-6 h-6 rounded-full bg-success/20 flex items-center justify-center flex-shrink-0">
+                        <CheckCircle className="w-4 h-4 text-success" />
+                      </div>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+                <Link to="/symptoms">
+                  <Button size="lg" className="mt-4 hover:scale-105 transition-transform">
+                    Find Care Now
+                    <ArrowRight className="ml-2 w-4 h-4" />
+                  </Button>
+                </Link>
+              </div>
+            </ScrollReveal>
+          </div>
+        </div>
+      </section>
+
+      {/* Benefits Section */}
+      <section className="py-20 bg-muted/30">
+        <div className="container mx-auto px-4">
+          <ScrollReveal>
+            <div className="text-center mb-16 space-y-4">
+              <h2 className="text-4xl font-bold text-foreground">Why Students Love Wellify</h2>
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                Built specifically for UW students, by people who understand your needs.
+              </p>
+            </div>
+          </ScrollReveal>
+
+          <div className="space-y-24">
+            {benefits.map((benefit, index) => (
+              <div key={benefit.title} className={`grid lg:grid-cols-2 gap-12 items-center ${index % 2 === 1 ? 'lg:grid-flow-dense' : ''}`}>
+                <ScrollReveal direction={index % 2 === 0 ? "left" : "right"} delay={100}>
+                  <div className={`space-y-6 ${index % 2 === 1 ? 'lg:col-start-2' : ''}`}>
+                    <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
+                      <benefit.icon className="w-6 h-6 text-primary" />
+                    </div>
+                    <h3 className="text-3xl font-bold text-foreground">
+                      {benefit.title}
+                    </h3>
+                    <p className="text-lg text-muted-foreground">
+                      {benefit.description}
+                    </p>
                   </div>
-                  <h3 className="text-xl font-semibold text-foreground">{title}</h3>
-                  <p className="text-muted-foreground">{description}</p>
-                </CardContent>
-              </Card>
+                </ScrollReveal>
+
+                <ScrollReveal direction={index % 2 === 0 ? "right" : "left"} delay={200}>
+                  <div className={`relative ${index % 2 === 1 ? 'lg:col-start-1 lg:row-start-1' : ''}`}>
+                    <div className="absolute -inset-4 bg-primary/20 blur-3xl rounded-full" />
+                    <img 
+                      src={benefit.image}
+                      alt={benefit.title}
+                      className="relative rounded-2xl shadow-2xl w-full h-auto"
+                    />
+                  </div>
+                </ScrollReveal>
+              </div>
             ))}
           </div>
         </div>
@@ -106,21 +230,24 @@ const Home = () => {
       {/* CTA Section */}
       <section className="py-20">
         <div className="container mx-auto px-4">
-          <Card className="bg-gradient-to-br from-primary/20 via-primary/10 to-accent/20 border-primary/30 shadow-2xl shadow-primary/30 backdrop-blur-sm">
-            <CardContent className="p-12 text-center space-y-6">
-              <h2 className="text-4xl font-bold text-foreground">
-                Not Feeling Well?
-              </h2>
-              <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-                Start by checking your symptoms. We'll show you exactly where to go and help you get there.
-              </p>
-              <Link to="/symptoms">
-                <Button size="lg" className="shadow-lg hover:shadow-xl hover:shadow-primary/50 hover:scale-105 transition-all">
-                  Get Started Now
-                </Button>
-              </Link>
-            </CardContent>
-          </Card>
+          <ScrollReveal direction="scale">
+            <Card className="bg-gradient-to-br from-primary/20 via-primary/10 to-accent/20 border-primary/30 shadow-2xl shadow-primary/30 backdrop-blur-sm">
+              <CardContent className="p-12 text-center space-y-6">
+                <h2 className="text-4xl font-bold text-foreground">
+                  Not Feeling Well?
+                </h2>
+                <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+                  Start by checking your symptoms. We'll show you exactly where to go and help you get there.
+                </p>
+                <Link to="/symptoms">
+                  <Button size="lg" className="shadow-lg hover:shadow-xl hover:shadow-primary/50 hover:scale-105 transition-all">
+                    Get Started Now
+                    <ArrowRight className="ml-2 w-4 h-4" />
+                  </Button>
+                </Link>
+              </CardContent>
+            </Card>
+          </ScrollReveal>
         </div>
       </section>
     </div>
