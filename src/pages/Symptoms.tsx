@@ -350,15 +350,26 @@ const Symptoms = () => {
                       {/* Get Directions */}
                       <div>
                         <h4 className="font-semibold text-foreground mb-3">Get Directions:</h4>
-                        <div className="flex gap-3">
-                          <Button className="flex-1 bg-[hsl(0_0%_0%)] hover:bg-[hsl(0_0%_10%)] text-white">
-                            <Car className="w-4 h-4 mr-2" />
-                            Uber
-                          </Button>
-                          <Button className="flex-1 bg-[hsl(330_100%_50%)] hover:bg-[hsl(330_100%_40%)] text-white">
-                            <Car className="w-4 h-4 mr-2" />
-                            Lyft
-                          </Button>
+                        <div className="space-y-3">
+                          <a
+                            href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(facility.location)}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-2 text-primary hover:underline text-sm"
+                          >
+                            <MapPin className="w-4 h-4" />
+                            Open in Google Maps
+                          </a>
+                          <div className="flex gap-3">
+                            <Button className="flex-1 bg-[hsl(0_0%_0%)] hover:bg-[hsl(0_0%_10%)] text-white">
+                              <Car className="w-4 h-4 mr-2" />
+                              Uber
+                            </Button>
+                            <Button className="flex-1 bg-[hsl(330_100%_50%)] hover:bg-[hsl(330_100%_40%)] text-white">
+                              <Car className="w-4 h-4 mr-2" />
+                              Lyft
+                            </Button>
+                          </div>
                         </div>
                       </div>
 
