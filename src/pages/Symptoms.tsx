@@ -85,18 +85,23 @@ const Symptoms = () => {
   };
 
   return (
-    <div className="min-h-screen pt-24 pb-12">
+    <div className="min-h-screen pt-32 pb-12">
       <div className="container mx-auto px-4 max-w-5xl">
         {!showResults ? (
           <div className="space-y-8 animate-fade-in-up">
             {/* Header */}
-            <div className="text-center space-y-4">
-              <h1 className="text-4xl md:text-5xl font-bold text-foreground">
-                What are your symptoms?
-              </h1>
-              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                Tell us what you're experiencing, and we'll recommend the best care option for you.
-              </p>
+            <div className="relative text-center space-y-4 mb-8">
+              <div className="absolute inset-0 -z-10 opacity-10 rounded-2xl overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1200&q=80" alt="" className="w-full h-full object-cover" />
+              </div>
+              <div className="py-12">
+                <h1 className="text-4xl md:text-5xl font-bold text-foreground">
+                  What are your symptoms?
+                </h1>
+                <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                  Tell us what you're experiencing, and we'll recommend the best care option for you.
+                </p>
+              </div>
             </div>
 
             {/* Search */}

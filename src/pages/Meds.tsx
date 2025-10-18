@@ -41,16 +41,21 @@ const Meds = () => {
   ];
 
   return (
-    <div className="min-h-screen pt-24 pb-12">
+    <div className="min-h-screen pt-32 pb-12">
       <div className="container mx-auto px-4 max-w-6xl">
         {/* Header */}
-        <div className="text-center mb-12 space-y-4 animate-fade-in-up">
-          <h1 className="text-4xl md:text-5xl font-bold text-foreground">
-            Medications & Supplies
-          </h1>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Fill prescriptions and order comfort items—all delivered to your door.
-          </p>
+        <div className="relative text-center mb-16 space-y-4 animate-fade-in-up">
+          <div className="absolute inset-0 -z-10 opacity-10 rounded-2xl overflow-hidden">
+            <img src={thermometer} alt="" className="w-full h-full object-cover" />
+          </div>
+          <div className="py-12">
+            <h1 className="text-4xl md:text-5xl font-bold text-foreground">
+              Medications & Supplies
+            </h1>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Fill prescriptions and order comfort items—all delivered to your door.
+            </p>
+          </div>
         </div>
 
         {/* Prescriptions Section */}
