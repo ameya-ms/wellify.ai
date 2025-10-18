@@ -1,5 +1,5 @@
 import { useState, useRef } from "react";
-import { Clock, MapPin, Stethoscope, AlertCircle, Car, Activity, Thermometer, Heart, Brain, Plus } from "lucide-react";
+import { Clock, MapPin, Stethoscope, AlertCircle, Car, Activity, Thermometer, Heart, Brain, Plus, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -125,8 +125,28 @@ const Symptoms = () => {
             <Card className="shadow-xl border-border/50 backdrop-blur-sm">
               <CardContent className="p-6 space-y-6">
                 {/* Search Bar */}
-                <div>
+                <div className="space-y-3">
                   <SymptomSearch onSymptomChange={setSymptoms} />
+                  
+                  {/* Selected Symptoms Display */}
+                  {symptoms.length > 0 && (
+                    <div className="flex flex-wrap gap-2 pt-2">
+                      {symptoms.map((symptom) => (
+                        <Badge
+                          key={symptom}
+                          className="bg-primary text-primary-foreground pl-3 pr-2 py-1.5 flex items-center gap-2"
+                        >
+                          {symptom}
+                          <button
+                            onClick={() => setSymptoms(symptoms.filter(s => s !== symptom))}
+                            className="hover:bg-primary-foreground/20 rounded-full p-0.5 transition-colors"
+                          >
+                            <X className="w-3 h-3" />
+                          </button>
+                        </Badge>
+                      ))}
+                    </div>
+                  )}
                 </div>
 
                 {/* Divider */}
