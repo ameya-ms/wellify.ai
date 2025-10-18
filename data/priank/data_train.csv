@@ -1,0 +1,401 @@
+age,gender,symptom_code,urgency,time_of_day,wait_load_A,wait_load_B,wait_load_C,specialty_match_A,specialty_match_B,specialty_match_C,assigned_center
+53,0,sprain,2,1,8,12,19,0,1,0,Center_B
+43,1,depression,5,0,10,23,5,0,1,0,Center_B
+54,0,sprain,3,0,9,9,10,0,1,0,Center_B
+24,1,burn,3,2,24,6,19,1,0,0,Center_A
+30,1,stress,1,0,11,15,10,0,0,1,Center_C
+25,1,chest pain,2,1,20,18,11,1,0,0,Center_A
+52,1,difficulty breathing,3,0,15,13,11,0,1,0,Center_B
+21,0,depression,3,1,6,9,8,0,1,0,Center_B
+42,0,depression,2,0,14,19,20,0,1,0,Center_B
+46,0,cardiac,3,2,6,22,13,0,0,0,Center_A
+32,1,fever,5,1,13,16,17,1,0,0,Center_A
+57,1,cardiac,2,0,24,7,19,0,0,0,Center_B
+26,1,fever,2,2,14,11,7,1,0,0,Center_A
+18,1,rash,4,1,13,13,9,0,0,1,Center_C
+57,0,fever,2,2,19,17,11,1,0,0,Center_A
+34,1,depression,1,1,19,22,16,0,1,0,Center_B
+36,1,stress,3,0,16,23,21,0,0,1,Center_C
+63,1,chest pain,5,1,22,7,19,1,0,0,Center_A
+24,0,vomiting,4,2,8,10,22,0,0,1,Center_C
+45,0,allergic reaction,2,0,16,12,21,0,0,1,Center_C
+34,1,burn,3,0,20,10,8,1,0,0,Center_A
+63,0,cardiac,5,1,15,11,12,0,0,0,Center_B
+39,1,cut/laceration,2,2,22,19,17,0,0,1,Center_C
+64,0,headache,3,1,9,24,24,1,0,0,Center_A
+51,1,fever,4,2,14,14,21,1,0,0,Center_A
+54,1,rash,5,1,11,13,10,0,0,1,Center_C
+37,0,anxiety,1,2,6,5,24,1,0,0,Center_A
+37,0,allergic reaction,5,0,23,7,6,0,0,1,Center_C
+39,1,sprain,1,1,12,21,8,0,1,0,Center_B
+48,0,sore throat,5,2,14,17,6,0,0,1,Center_C
+22,1,anxiety,4,2,15,17,8,1,0,0,Center_A
+25,0,cut/laceration,1,0,15,17,18,0,0,1,Center_C
+19,1,allergic reaction,3,0,6,7,5,0,0,1,Center_C
+43,1,fever,1,2,20,21,7,1,0,0,Center_A
+61,0,burn,3,1,6,21,19,1,0,0,Center_A
+57,1,suspected fracture,2,0,12,15,14,0,1,0,Center_B
+51,1,vomiting,5,1,14,11,5,0,0,1,Center_C
+60,1,fever,2,0,9,24,24,1,0,0,Center_A
+18,0,diarrhea,1,1,12,7,11,1,0,0,Center_A
+23,1,allergic reaction,5,0,9,11,19,0,0,1,Center_C
+58,1,sore throat,5,0,18,24,23,0,0,1,Center_C
+54,0,chest pain,2,2,6,10,22,1,0,0,Center_A
+55,0,headache,5,1,7,17,16,1,0,0,Center_A
+39,1,fever,1,1,11,11,16,1,0,0,Center_A
+45,0,cardiac,3,0,12,8,15,0,0,0,Center_B
+64,0,anxiety,4,0,20,19,18,1,0,0,Center_A
+40,1,sore throat,5,1,10,17,15,0,0,1,Center_C
+21,0,depression,4,2,14,20,11,0,1,0,Center_B
+37,1,anxiety,3,0,21,20,22,1,0,0,Center_A
+39,0,headache,3,0,18,17,23,1,0,0,Center_A
+25,1,sprain,4,1,16,7,12,0,1,0,Center_B
+63,0,diarrhea,2,1,7,23,24,1,0,0,Center_A
+22,1,fever,4,0,9,23,12,1,0,0,Center_A
+61,0,anxiety,5,0,21,5,17,1,0,0,Center_A
+32,1,difficulty breathing,3,0,11,12,24,0,1,0,Center_B
+59,1,depression,4,1,5,10,21,0,1,0,Center_B
+28,0,vomiting,4,1,15,24,6,0,0,1,Center_C
+62,1,stress,2,1,7,6,23,0,0,1,Center_C
+56,1,sprain,1,2,13,13,14,0,1,0,Center_B
+19,1,vomiting,3,0,21,10,10,0,0,1,Center_C
+38,1,sore throat,1,1,12,20,19,0,0,1,Center_C
+59,1,suspected fracture,2,1,8,24,17,0,1,0,Center_B
+31,1,difficulty breathing,1,0,9,15,18,0,1,0,Center_B
+41,0,sprain,1,1,12,23,20,0,1,0,Center_B
+25,1,nausea,5,1,18,5,16,0,1,0,Center_B
+24,1,suspected fracture,5,0,9,24,17,0,1,0,Center_B
+62,1,rash,3,2,20,11,23,0,0,1,Center_C
+25,1,stress,5,2,8,19,18,0,0,1,Center_C
+41,1,depression,4,1,18,11,5,0,1,0,Center_B
+64,0,chest pain,3,2,20,21,7,1,0,0,Center_A
+53,1,anxiety,5,1,13,17,23,1,0,0,Center_A
+25,0,anxiety,2,0,17,20,22,1,0,0,Center_A
+47,0,allergic reaction,5,1,10,13,8,0,0,1,Center_C
+40,0,headache,4,2,17,14,22,1,0,0,Center_A
+63,1,chest pain,1,1,22,19,20,1,0,0,Center_A
+38,0,sprain,4,1,14,22,9,0,1,0,Center_B
+29,0,suspected fracture,4,1,17,17,22,0,1,0,Center_B
+58,1,cardiac,3,2,21,16,13,0,0,0,Center_C
+54,1,cut/laceration,4,2,23,5,22,0,0,1,Center_C
+41,0,headache,4,2,12,10,18,1,0,0,Center_A
+51,1,sprain,3,1,13,24,9,0,1,0,Center_B
+33,0,stress,1,1,16,5,22,0,0,1,Center_C
+33,0,sore throat,4,1,12,22,22,0,0,1,Center_C
+20,0,sprain,1,0,17,14,10,0,1,0,Center_B
+45,1,cardiac,3,2,11,14,21,0,0,0,Center_A
+30,0,rash,5,0,12,8,16,0,0,1,Center_C
+20,1,allergic reaction,3,0,8,16,20,0,0,1,Center_C
+58,1,burn,1,0,17,10,6,1,0,0,Center_A
+38,0,sprain,1,2,20,5,21,0,1,0,Center_B
+52,1,depression,5,1,13,13,11,0,1,0,Center_B
+49,1,burn,3,1,12,14,13,1,0,0,Center_A
+50,0,stress,3,1,16,22,17,0,0,1,Center_C
+39,1,cut/laceration,1,1,20,9,22,0,0,1,Center_C
+33,1,diarrhea,1,0,18,9,22,1,0,0,Center_A
+35,0,difficulty breathing,1,1,16,7,24,0,1,0,Center_B
+62,1,difficulty breathing,4,1,17,7,21,0,1,0,Center_B
+50,1,anxiety,3,2,11,11,11,1,0,0,Center_A
+31,1,headache,2,1,18,15,10,1,0,0,Center_A
+61,0,nausea,2,2,22,22,18,0,1,0,Center_B
+43,0,diarrhea,1,0,23,13,19,1,0,0,Center_A
+37,0,diarrhea,5,0,13,21,15,1,0,0,Center_A
+28,1,sprain,5,2,9,16,12,0,1,0,Center_B
+48,0,chest pain,3,1,20,10,12,1,0,0,Center_A
+18,1,depression,4,1,22,18,6,0,1,0,Center_B
+22,1,depression,1,1,10,11,8,0,1,0,Center_B
+54,0,vomiting,2,1,21,24,13,0,0,1,Center_C
+33,0,fever,4,2,21,17,5,1,0,0,Center_A
+57,0,headache,1,1,19,24,11,1,0,0,Center_A
+57,0,nausea,5,0,5,6,18,0,1,0,Center_B
+43,1,cut/laceration,2,1,15,17,5,0,0,1,Center_C
+47,0,difficulty breathing,5,1,11,12,11,0,1,0,Center_B
+61,0,depression,2,1,10,19,18,0,1,0,Center_B
+37,0,diarrhea,4,1,23,12,13,1,0,0,Center_A
+56,0,anxiety,4,2,6,23,18,1,0,0,Center_A
+28,0,cut/laceration,1,0,19,7,23,0,0,1,Center_C
+32,0,headache,3,1,22,7,11,1,0,0,Center_A
+19,0,stress,2,1,13,24,15,0,0,1,Center_C
+20,1,nausea,3,1,15,23,11,0,1,0,Center_B
+41,0,cardiac,3,0,19,6,14,0,0,0,Center_B
+36,0,nausea,4,0,20,19,15,0,1,0,Center_B
+41,0,vomiting,1,0,6,23,15,0,0,1,Center_C
+27,0,cut/laceration,3,1,11,5,24,0,0,1,Center_C
+63,1,cut/laceration,1,0,12,19,21,0,0,1,Center_C
+48,0,difficulty breathing,1,0,18,15,15,0,1,0,Center_B
+41,0,sprain,5,1,17,8,6,0,1,0,Center_B
+22,0,burn,2,1,14,12,16,1,0,0,Center_A
+55,0,nausea,1,0,19,19,10,0,1,0,Center_B
+50,0,rash,2,2,8,23,16,0,0,1,Center_C
+63,1,rash,3,0,14,18,14,0,0,1,Center_C
+26,1,allergic reaction,1,1,21,15,8,0,0,1,Center_C
+30,1,cut/laceration,4,1,21,18,7,0,0,1,Center_C
+26,0,rash,4,1,8,17,11,0,0,1,Center_C
+20,0,anxiety,2,1,8,13,21,1,0,0,Center_A
+39,0,stress,5,1,19,5,11,0,0,1,Center_C
+31,0,allergic reaction,3,0,19,20,23,0,0,1,Center_C
+24,1,fever,1,2,18,16,11,1,0,0,Center_A
+60,1,burn,5,2,6,17,6,1,0,0,Center_A
+59,1,stress,3,2,9,7,21,0,0,1,Center_C
+47,1,diarrhea,4,0,10,23,21,1,0,0,Center_A
+56,1,diarrhea,3,2,15,5,13,1,0,0,Center_A
+23,1,burn,5,0,9,17,8,1,0,0,Center_A
+53,0,vomiting,2,2,9,9,6,0,0,1,Center_C
+28,0,rash,4,0,9,10,18,0,0,1,Center_C
+40,1,sprain,4,0,12,6,22,0,1,0,Center_B
+50,0,diarrhea,5,1,21,16,9,1,0,0,Center_A
+49,0,sore throat,1,2,7,5,21,0,0,1,Center_C
+49,1,suspected fracture,1,1,6,10,17,0,1,0,Center_B
+28,0,sore throat,1,1,11,15,10,0,0,1,Center_C
+38,0,sprain,3,0,19,11,10,0,1,0,Center_B
+57,1,rash,3,1,12,11,21,0,0,1,Center_C
+29,0,difficulty breathing,2,1,16,19,11,0,1,0,Center_B
+23,1,vomiting,3,0,8,15,17,0,0,1,Center_C
+62,0,nausea,5,2,12,24,24,0,1,0,Center_B
+36,1,difficulty breathing,5,1,22,6,14,0,1,0,Center_B
+43,1,rash,2,0,17,18,8,0,0,1,Center_C
+38,0,allergic reaction,5,2,8,7,22,0,0,1,Center_C
+20,1,anxiety,3,1,14,22,10,1,0,0,Center_A
+63,1,allergic reaction,4,1,19,13,13,0,0,1,Center_C
+36,1,anxiety,2,0,20,13,18,1,0,0,Center_A
+36,1,difficulty breathing,4,0,17,17,8,0,1,0,Center_B
+43,0,cut/laceration,4,0,9,13,15,0,0,1,Center_C
+39,1,suspected fracture,4,0,19,11,10,0,1,0,Center_B
+54,0,headache,5,2,15,5,21,1,0,0,Center_A
+37,1,burn,5,1,19,15,15,1,0,0,Center_A
+60,1,fever,3,2,16,8,6,1,0,0,Center_A
+39,0,nausea,3,2,20,14,14,0,1,0,Center_B
+23,0,depression,3,1,8,20,15,0,1,0,Center_B
+38,0,headache,1,0,23,13,14,1,0,0,Center_A
+29,0,fever,5,2,13,15,24,1,0,0,Center_A
+39,1,cut/laceration,3,1,20,14,19,0,0,1,Center_C
+26,0,burn,3,0,23,23,8,1,0,0,Center_A
+21,1,rash,2,1,14,22,20,0,0,1,Center_C
+53,0,vomiting,4,2,14,17,5,0,0,1,Center_C
+23,0,cardiac,2,1,19,8,22,0,0,0,Center_B
+21,0,sprain,3,1,23,22,18,0,1,0,Center_B
+28,0,sprain,5,2,8,9,10,0,1,0,Center_B
+58,1,fever,2,1,14,14,12,1,0,0,Center_A
+18,0,cut/laceration,4,0,17,20,21,0,0,1,Center_C
+59,0,chest pain,3,1,23,18,5,1,0,0,Center_A
+42,1,allergic reaction,2,1,8,22,22,0,0,1,Center_C
+18,1,vomiting,1,0,8,12,23,0,0,1,Center_C
+46,0,nausea,2,1,7,18,22,0,1,0,Center_B
+43,0,allergic reaction,3,2,18,23,19,0,0,1,Center_C
+37,1,burn,1,1,24,16,6,1,0,0,Center_A
+30,0,suspected fracture,4,1,8,14,7,0,1,0,Center_B
+63,1,nausea,3,0,19,21,16,0,1,0,Center_B
+46,0,headache,5,2,24,15,11,1,0,0,Center_A
+40,0,fever,3,0,22,12,7,1,0,0,Center_A
+21,0,rash,2,1,7,19,19,0,0,1,Center_C
+37,0,suspected fracture,4,2,8,19,11,0,1,0,Center_B
+24,0,nausea,4,1,16,12,6,0,1,0,Center_B
+22,1,rash,3,0,22,22,6,0,0,1,Center_C
+27,0,anxiety,4,2,24,17,22,1,0,0,Center_A
+35,0,diarrhea,1,1,14,13,13,1,0,0,Center_A
+38,0,allergic reaction,5,0,11,24,24,0,0,1,Center_C
+44,0,stress,2,2,8,10,14,0,0,1,Center_C
+63,0,nausea,5,0,13,6,9,0,1,0,Center_B
+45,1,allergic reaction,4,1,16,23,6,0,0,1,Center_C
+54,1,chest pain,2,1,9,20,16,1,0,0,Center_A
+45,0,cardiac,1,0,23,14,16,0,0,0,Center_B
+32,1,suspected fracture,5,1,9,17,17,0,1,0,Center_B
+35,1,fever,3,0,15,11,22,1,0,0,Center_A
+41,1,vomiting,1,1,10,10,24,0,0,1,Center_C
+20,1,sore throat,1,1,14,20,11,0,0,1,Center_C
+48,0,difficulty breathing,3,2,15,5,21,0,1,0,Center_B
+23,1,sprain,2,0,5,19,5,0,1,0,Center_B
+34,1,anxiety,3,2,16,20,6,1,0,0,Center_A
+47,0,burn,4,2,22,14,24,1,0,0,Center_A
+57,0,suspected fracture,3,0,5,18,21,0,1,0,Center_B
+49,0,diarrhea,1,2,18,24,22,1,0,0,Center_A
+35,1,stress,5,1,5,24,18,0,0,1,Center_C
+31,1,cut/laceration,2,0,15,11,14,0,0,1,Center_C
+27,0,sprain,5,0,6,13,17,0,1,0,Center_B
+38,0,cardiac,4,2,22,17,20,0,0,0,Center_B
+45,0,stress,2,1,20,13,12,0,0,1,Center_C
+52,1,headache,2,0,17,20,8,1,0,0,Center_A
+55,1,chest pain,2,0,24,15,21,1,0,0,Center_A
+58,1,nausea,5,1,7,7,20,0,1,0,Center_B
+36,1,sore throat,5,1,22,23,22,0,0,1,Center_C
+31,1,depression,2,1,8,22,19,0,1,0,Center_B
+38,0,chest pain,1,2,7,10,6,1,0,0,Center_A
+25,1,chest pain,2,2,23,15,20,1,0,0,Center_A
+22,0,fever,5,2,12,20,19,1,0,0,Center_A
+26,1,vomiting,1,1,17,19,10,0,0,1,Center_C
+31,0,burn,5,0,20,18,15,1,0,0,Center_A
+36,0,stress,2,1,24,21,20,0,0,1,Center_C
+32,0,cut/laceration,1,1,10,23,7,0,0,1,Center_C
+29,1,cardiac,1,0,15,10,10,0,0,0,Center_B
+59,0,cut/laceration,1,2,7,9,18,0,0,1,Center_C
+51,0,cut/laceration,2,1,24,19,10,0,0,1,Center_C
+33,0,vomiting,3,1,10,19,15,0,0,1,Center_C
+62,0,suspected fracture,3,1,12,10,16,0,1,0,Center_B
+48,1,allergic reaction,1,1,17,24,18,0,0,1,Center_C
+52,0,cardiac,1,2,5,23,19,0,0,0,Center_A
+59,0,suspected fracture,4,0,14,15,9,0,1,0,Center_B
+39,0,difficulty breathing,3,0,11,15,18,0,1,0,Center_B
+22,1,nausea,3,2,15,21,12,0,1,0,Center_B
+38,1,vomiting,4,0,6,23,11,0,0,1,Center_C
+24,1,sore throat,2,0,6,14,7,0,0,1,Center_C
+47,1,cut/laceration,2,1,16,18,13,0,0,1,Center_C
+64,1,vomiting,3,0,19,20,23,0,0,1,Center_C
+41,1,depression,3,1,10,19,23,0,1,0,Center_B
+54,1,fever,2,0,17,13,17,1,0,0,Center_A
+24,0,anxiety,1,1,21,11,15,1,0,0,Center_A
+44,1,cardiac,1,1,21,17,9,0,0,0,Center_C
+24,0,burn,1,0,24,24,23,1,0,0,Center_A
+33,1,allergic reaction,5,1,11,9,6,0,0,1,Center_C
+39,1,sprain,1,1,16,24,13,0,1,0,Center_B
+52,0,rash,5,1,19,22,21,0,0,1,Center_C
+62,1,sprain,2,0,18,16,12,0,1,0,Center_B
+64,0,anxiety,2,2,11,23,24,1,0,0,Center_A
+27,0,nausea,2,1,11,18,13,0,1,0,Center_B
+51,0,stress,2,1,20,18,11,0,0,1,Center_C
+62,0,diarrhea,2,1,18,17,13,1,0,0,Center_A
+22,1,headache,3,0,20,10,11,1,0,0,Center_A
+63,0,anxiety,3,1,16,15,8,1,0,0,Center_A
+41,0,sore throat,3,1,17,21,12,0,0,1,Center_C
+44,0,difficulty breathing,5,0,22,6,21,0,1,0,Center_B
+38,1,cardiac,1,2,18,8,11,0,0,0,Center_B
+51,1,cardiac,1,0,24,6,24,0,0,0,Center_B
+61,0,allergic reaction,1,1,15,17,5,0,0,1,Center_C
+38,0,vomiting,4,0,6,9,16,0,0,1,Center_C
+55,0,nausea,3,0,18,8,21,0,1,0,Center_B
+32,1,allergic reaction,3,0,17,6,22,0,0,1,Center_C
+49,0,sore throat,3,2,5,17,12,0,0,1,Center_C
+37,0,suspected fracture,5,0,16,15,19,0,1,0,Center_B
+31,0,vomiting,1,2,8,11,7,0,0,1,Center_C
+33,0,burn,4,1,6,16,17,1,0,0,Center_A
+21,1,cut/laceration,1,2,13,11,8,0,0,1,Center_C
+60,0,diarrhea,2,1,7,6,24,1,0,0,Center_A
+41,1,diarrhea,2,1,6,8,23,1,0,0,Center_A
+38,1,rash,1,0,11,5,19,0,0,1,Center_C
+41,0,vomiting,1,0,16,9,18,0,0,1,Center_C
+21,0,sore throat,5,0,15,7,20,0,0,1,Center_C
+22,0,chest pain,3,0,24,8,21,1,0,0,Center_A
+61,1,stress,4,0,8,21,6,0,0,1,Center_C
+32,0,allergic reaction,4,1,14,8,9,0,0,1,Center_C
+40,0,chest pain,1,0,11,6,5,1,0,0,Center_A
+20,1,diarrhea,1,1,21,15,10,1,0,0,Center_A
+44,0,chest pain,1,2,19,5,24,1,0,0,Center_A
+46,0,depression,5,0,20,14,19,0,1,0,Center_B
+44,1,diarrhea,1,1,19,22,15,1,0,0,Center_A
+32,1,chest pain,1,0,22,5,23,1,0,0,Center_A
+27,0,depression,3,2,16,19,8,0,1,0,Center_B
+63,1,allergic reaction,3,1,18,13,20,0,0,1,Center_C
+21,0,diarrhea,4,1,21,10,18,1,0,0,Center_A
+56,1,headache,1,1,17,19,20,1,0,0,Center_A
+22,0,suspected fracture,2,1,14,20,17,0,1,0,Center_B
+64,1,allergic reaction,3,1,15,22,20,0,0,1,Center_C
+36,1,fever,5,0,6,12,11,1,0,0,Center_A
+39,1,nausea,5,1,6,17,14,0,1,0,Center_B
+23,1,depression,2,2,19,20,18,0,1,0,Center_B
+51,1,fever,2,1,16,6,21,1,0,0,Center_A
+63,1,anxiety,3,1,13,21,19,1,0,0,Center_A
+62,1,diarrhea,5,2,19,12,5,1,0,0,Center_A
+19,1,sore throat,1,0,8,20,14,0,0,1,Center_C
+58,0,allergic reaction,5,1,18,20,22,0,0,1,Center_C
+53,1,depression,1,1,23,18,7,0,1,0,Center_B
+36,1,fever,2,1,23,19,13,1,0,0,Center_A
+43,1,sore throat,2,1,24,16,17,0,0,1,Center_C
+56,0,rash,3,1,14,15,15,0,0,1,Center_C
+53,1,depression,1,0,9,17,18,0,1,0,Center_B
+54,0,cut/laceration,3,0,16,22,20,0,0,1,Center_C
+50,1,diarrhea,4,0,6,24,23,1,0,0,Center_A
+21,0,nausea,1,2,13,18,20,0,1,0,Center_B
+60,0,headache,3,1,7,7,6,1,0,0,Center_A
+41,1,diarrhea,1,0,24,24,6,1,0,0,Center_A
+49,1,cut/laceration,2,0,15,21,24,0,0,1,Center_C
+56,1,stress,5,0,16,6,16,0,0,1,Center_C
+64,0,headache,2,0,13,16,10,1,0,0,Center_A
+18,1,depression,4,0,16,9,20,0,1,0,Center_B
+60,1,diarrhea,5,0,5,14,20,1,0,0,Center_A
+21,0,stress,2,0,18,6,22,0,0,1,Center_C
+19,0,burn,5,0,6,21,14,1,0,0,Center_A
+31,0,cardiac,5,2,15,9,5,0,0,0,Center_C
+48,1,fever,5,1,23,7,10,1,0,0,Center_A
+23,0,fever,3,0,17,17,5,1,0,0,Center_A
+56,0,sore throat,4,1,24,18,20,0,0,1,Center_C
+45,1,cardiac,1,1,10,23,21,0,0,0,Center_A
+34,1,rash,4,0,17,20,21,0,0,1,Center_C
+38,0,anxiety,4,1,10,20,24,1,0,0,Center_A
+52,0,suspected fracture,1,1,17,6,7,0,1,0,Center_B
+18,0,burn,5,1,18,17,16,1,0,0,Center_A
+27,1,depression,4,1,14,24,20,0,1,0,Center_B
+21,1,suspected fracture,5,0,6,22,15,0,1,0,Center_B
+49,0,diarrhea,4,0,21,16,13,1,0,0,Center_A
+41,1,diarrhea,1,1,9,15,14,1,0,0,Center_A
+57,1,headache,5,0,11,17,7,1,0,0,Center_A
+44,1,allergic reaction,2,0,8,18,10,0,0,1,Center_C
+45,1,stress,1,0,18,21,24,0,0,1,Center_C
+40,0,cardiac,2,0,16,12,13,0,0,0,Center_B
+57,1,rash,1,2,18,8,20,0,0,1,Center_C
+37,0,diarrhea,3,1,24,16,5,1,0,0,Center_A
+20,1,stress,2,0,24,9,7,0,0,1,Center_C
+49,0,difficulty breathing,4,0,21,11,14,0,1,0,Center_B
+44,0,chest pain,5,2,20,22,15,1,0,0,Center_A
+32,0,depression,1,1,12,17,18,0,1,0,Center_B
+62,1,vomiting,2,0,16,7,23,0,0,1,Center_C
+36,0,diarrhea,4,2,22,12,21,1,0,0,Center_A
+47,1,cut/laceration,2,1,19,17,23,0,0,1,Center_C
+35,1,chest pain,3,0,22,20,12,1,0,0,Center_A
+56,0,sore throat,3,0,12,11,18,0,0,1,Center_C
+22,1,allergic reaction,4,2,14,16,5,0,0,1,Center_C
+21,0,depression,5,0,19,20,10,0,1,0,Center_B
+33,0,allergic reaction,3,2,17,19,9,0,0,1,Center_C
+36,0,suspected fracture,1,0,9,9,14,0,1,0,Center_B
+32,1,sprain,1,2,12,24,12,0,1,0,Center_B
+58,0,burn,4,2,8,18,21,1,0,0,Center_A
+50,0,difficulty breathing,2,2,21,8,21,0,1,0,Center_B
+47,1,fever,3,1,22,22,5,1,0,0,Center_A
+47,0,diarrhea,1,1,19,16,24,1,0,0,Center_A
+34,1,allergic reaction,5,1,7,16,17,0,0,1,Center_C
+35,0,allergic reaction,2,0,6,18,23,0,0,1,Center_C
+55,1,cut/laceration,4,0,14,23,24,0,0,1,Center_C
+53,1,fever,4,1,10,24,20,1,0,0,Center_A
+27,1,sprain,1,1,7,8,13,0,1,0,Center_B
+42,0,fever,2,1,10,22,12,1,0,0,Center_A
+34,0,fever,3,1,20,14,11,1,0,0,Center_A
+28,1,diarrhea,5,2,16,17,21,1,0,0,Center_A
+43,0,stress,5,1,5,14,5,0,0,1,Center_C
+49,0,chest pain,3,2,9,8,9,1,0,0,Center_A
+42,0,stress,5,1,19,14,6,0,0,1,Center_C
+25,0,fever,4,0,5,13,22,1,0,0,Center_A
+50,1,allergic reaction,1,0,20,23,22,0,0,1,Center_C
+48,1,anxiety,3,0,21,11,18,1,0,0,Center_A
+35,0,allergic reaction,1,1,19,19,7,0,0,1,Center_C
+30,1,difficulty breathing,4,0,9,16,7,0,1,0,Center_B
+53,1,sore throat,5,1,24,20,19,0,0,1,Center_C
+25,0,cardiac,1,0,21,13,11,0,0,0,Center_C
+25,0,fever,2,1,18,8,21,1,0,0,Center_A
+30,0,cut/laceration,2,2,24,15,9,0,0,1,Center_C
+56,1,cut/laceration,2,1,24,16,21,0,0,1,Center_C
+31,1,sprain,4,0,17,16,5,0,1,0,Center_B
+60,0,anxiety,5,1,14,23,17,1,0,0,Center_A
+27,1,sore throat,5,1,20,15,19,0,0,1,Center_C
+52,1,allergic reaction,1,1,6,6,18,0,0,1,Center_C
+21,0,rash,4,1,21,15,7,0,0,1,Center_C
+50,0,rash,5,1,12,12,14,0,0,1,Center_C
+61,0,chest pain,1,1,11,20,16,1,0,0,Center_A
+46,0,vomiting,4,0,14,12,6,0,0,1,Center_C
+35,0,allergic reaction,3,2,17,11,19,0,0,1,Center_C
+56,1,stress,4,0,22,8,9,0,0,1,Center_C
+61,1,fever,4,1,5,20,14,1,0,0,Center_A
+49,1,difficulty breathing,2,2,19,22,22,0,1,0,Center_B
+38,0,stress,4,1,15,15,8,0,0,1,Center_C
+57,0,allergic reaction,1,1,22,18,17,0,0,1,Center_C
+38,0,rash,5,0,20,24,12,0,0,1,Center_C
+59,0,fever,3,1,13,22,5,1,0,0,Center_A
+27,1,anxiety,4,1,14,22,14,1,0,0,Center_A
+59,1,diarrhea,1,0,21,8,18,1,0,0,Center_A
+28,0,burn,3,1,9,10,19,1,0,0,Center_A
+18,0,difficulty breathing,5,1,19,14,24,0,1,0,Center_B
+25,0,sore throat,5,0,17,16,7,0,0,1,Center_C
+29,1,anxiety,4,0,24,5,22,1,0,0,Center_A
+53,1,sprain,3,1,18,7,18,0,1,0,Center_B
+29,0,stress,4,2,8,18,9,0,0,1,Center_C
+26,1,rash,4,0,9,13,6,0,0,1,Center_C
+32,0,stress,3,1,15,23,5,0,0,1,Center_C
+42,0,cut/laceration,5,1,17,23,23,0,0,1,Center_C
+52,1,chest pain,5,1,21,23,13,1,0,0,Center_A
