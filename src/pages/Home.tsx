@@ -61,7 +61,7 @@ const Home = () => {
               <div className="space-y-8">
                 <div className="space-y-4">
                   <h1 className="text-5xl md:text-6xl font-bold text-foreground leading-tight">
-                    Taking Get Well Soon Literally
+                    Taking "Get Well Soon" Literally.
                   </h1>
                   <p className="text-xl text-muted-foreground">
                     Navigate healthcare with confidence. Find care, order meds, and understand your insurance—all in one
@@ -201,10 +201,7 @@ const Home = () => {
 
           <div className="space-y-24">
             {benefits.map((benefit, index) => (
-              <div
-                key={benefit.title}
-                className="grid lg:grid-cols-2 gap-12 items-center"
-              >
+              <div key={benefit.title} className="grid lg:grid-cols-2 gap-12 items-center">
                 <ScrollReveal direction="left" delay={100}>
                   <div className="relative">
                     <div className="absolute -inset-4 bg-primary/20 blur-3xl rounded-full" />
