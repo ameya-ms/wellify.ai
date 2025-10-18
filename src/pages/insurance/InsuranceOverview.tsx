@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
+import { cn } from "@/lib/utils";
 import uhcLogo from "@/assets/insurance/uhc-logo.png";
 import cignaLogo from "@/assets/insurance/cigna-logo.png";
 import medicareLogo from "@/assets/insurance/medicare-logo.png";
@@ -13,6 +14,7 @@ import bcbsLogo from "@/assets/insurance/bcbs-logo.png";
 
 const InsuranceOverview = () => {
   const [searchQuery, setSearchQuery] = useState("");
+  const [selectedProvider, setSelectedProvider] = useState<string | null>(null);
 
   const insuranceProviders = [
     { name: "Premera Blue Cross", logo: bcbsLogo },
@@ -392,25 +394,39 @@ const InsuranceOverview = () => {
         <Card className="mb-12 border-border animate-fade-in-up" style={{ animationDelay: "200ms" }}>
           <CardContent className="p-8">
             <div className="space-y-6">
-              <div className="text-center space-y-2">
-                <h3 className="text-2xl font-semibold text-foreground">Add your insurance to see in-network primary care doctors</h3>
-                <p className="text-muted-foreground">Select your insurance provider to get started</p>
+              <div className="text-center space-y-3">
+                <h3 className="text-2xl font-semibold text-foreground">Select Your Insurance Provider</h3>
+                <p className="text-muted-foreground">Click on your insurance provider to see in-network doctors and coverage details</p>
               </div>
               
-              <div className="grid md:grid-cols-3 lg:grid-cols-6 gap-4">
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
                 {insuranceProviders.map((provider, index) => (
                   <Card 
                     key={provider.name}
-                    className="border-border/50 hover:border-primary/50 hover:shadow-lg transition-all cursor-pointer group overflow-hidden"
+                    onClick={() => setSelectedProvider(provider.name)}
+                    className={cn(
+                      "border-2 transition-all cursor-pointer group relative overflow-hidden",
+                      selectedProvider === provider.name 
+                        ? "border-primary shadow-lg shadow-primary/30 scale-105" 
+                        : "border-border/50 hover:border-primary/50 hover:shadow-lg hover:scale-105"
+                    )}
                     style={{ animationDelay: `${(index + 3) * 100}ms` }}
                   >
-                    <CardContent className="p-0">
+                    <CardContent className="p-0 relative">
+                      {selectedProvider === provider.name && (
+                        <div className="absolute top-2 right-2 z-10 w-6 h-6 rounded-full bg-primary flex items-center justify-center">
+                          <CheckCircle className="w-4 h-4 text-primary-foreground" />
+                        </div>
+                      )}
                       <div className="aspect-square flex items-center justify-center bg-white/5 p-6 group-hover:bg-white/10 transition-colors">
                         <img 
                           src={provider.logo} 
                           alt={provider.name}
                           className="w-full h-full object-contain"
                         />
+                      </div>
+                      <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-background via-background/95 to-transparent p-3 translate-y-full group-hover:translate-y-0 transition-transform">
+                        <p className="text-xs font-medium text-foreground text-center line-clamp-2">{provider.name}</p>
                       </div>
                     </CardContent>
                   </Card>
@@ -460,10 +476,22 @@ const InsuranceOverview = () => {
                   </DialogContent>
                 </Dialog>
                 <div>
-                  <Button size="lg" className="hover:scale-105 transition-transform">
-                    <Plus className="w-4 h-4 mr-2" />
-                    Add your insurance coverage
-                  </Button>
+                  {selectedProvider ? (
+                    <div className="space-y-3">
+                      <div className="flex items-center justify-center gap-2 text-success">
+                        <CheckCircle className="w-5 h-5" />
+                        <p className="font-medium">Selected: {selectedProvider}</p>
+                      </div>
+                      <Button size="lg" className="hover:scale-105 transition-transform">
+                        Continue with {selectedProvider}
+                      </Button>
+                    </div>
+                  ) : (
+                    <Button size="lg" variant="outline" className="hover:scale-105 transition-transform">
+                      <Plus className="w-4 h-4 mr-2" />
+                      Or manually enter your insurance
+                    </Button>
+                  )}
                 </div>
               </div>
             </div>
