@@ -7,7 +7,9 @@ import Navigation from "./components/Navigation";
 import Home from "./pages/Home";
 import Symptoms from "./pages/Symptoms";
 import Meds from "./pages/Meds";
-import Insurance from "./pages/Insurance";
+import InsuranceOverview from "./pages/insurance/InsuranceOverview";
+import InsurancePlans from "./pages/insurance/InsurancePlans";
+import InsuranceFAQ from "./pages/insurance/InsuranceFAQ";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -23,7 +25,9 @@ const App = () => (
           <Route path="/" element={<Home />} />
           <Route path="/symptoms" element={<Symptoms />} />
           <Route path="/meds" element={<Meds />} />
-          <Route path="/insurance" element={<Insurance />} />
+          <Route path="/insurance" element={<InsuranceOverview />} />
+          <Route path="/insurance/plans" element={<InsurancePlans />} />
+          <Route path="/insurance/faq" element={<InsuranceFAQ />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
