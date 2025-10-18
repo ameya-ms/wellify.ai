@@ -71,7 +71,15 @@ export default {
         },
       },
       fontFamily: {
-        sans: ['Montserrat', 'system-ui', 'sans-serif'],
+        sans: ['Inter', 'system-ui', 'sans-serif'],
+      },
+      letterSpacing: {
+        tighter: '-0.02em',
+        tight: '-0.01em',
+      },
+      lineHeight: {
+        tight: '1.2',
+        relaxed: '1.65',
       },
       backgroundImage: {
         'gradient-hero': 'var(--gradient-hero)',
