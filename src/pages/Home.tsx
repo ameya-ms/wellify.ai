@@ -64,8 +64,8 @@ const Home = () => {
                     taking "get well soon" literally.
                   </h1>
                   <p className="text-xl text-muted-foreground">
-                    Navigate healthcare with confidence. Find care, order meds, and understand your insurance—all in one
-                    place.
+                    navigate healthcare with confidence. find care, order meds, and understand your insurance, all in
+                    one place.
                   </p>
                 </div>
                 <div className="flex flex-col sm:flex-row gap-4">
