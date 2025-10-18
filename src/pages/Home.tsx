@@ -61,7 +61,7 @@ const Home = () => {
               <div className="space-y-8">
                 <div className="space-y-4">
                   <h1 className="text-5xl md:text-6xl font-bold text-foreground leading-tight">
-                    Taking "Get Well Soon" Literally.
+                    taking "get well soon" literally.
                   </h1>
                   <p className="text-xl text-muted-foreground">
                     Navigate healthcare with confidence. Find care, order meds, and understand your insurance—all in one
