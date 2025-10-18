@@ -111,6 +111,43 @@ const Symptoms = () => {
               </CardContent>
             </Card>
 
+            {/* Multiselect Symptom Table */}
+            <div className="space-y-4">
+              <h2 className="text-xl font-semibold text-foreground text-center">
+                Select Your Symptoms
+              </h2>
+              <Card className="shadow-xl border-border/50 backdrop-blur-sm">
+                <CardContent className="p-6">
+                  <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+                    {[
+                      "Fever", "Cough", "Headache", "Sore Throat", 
+                      "Nausea", "Fatigue", "Body Aches", "Chills",
+                      "Congestion", "Runny Nose", "Sneezing", "Dizziness",
+                      "Shortness of Breath", "Chest Pain", "Stomach Pain", "Diarrhea"
+                    ].map((symptom) => (
+                      <button
+                        key={symptom}
+                        onClick={() => {
+                          if (symptoms.includes(symptom)) {
+                            setSymptoms(symptoms.filter(s => s !== symptom));
+                          } else {
+                            setSymptoms([...symptoms, symptom]);
+                          }
+                        }}
+                        className={`p-3 rounded-lg border-2 text-sm font-medium transition-all duration-200 ${
+                          symptoms.includes(symptom)
+                            ? "bg-primary text-primary-foreground border-primary shadow-md"
+                            : "bg-card text-foreground border-border hover:border-primary/50 hover:bg-primary/5"
+                        }`}
+                      >
+                        {symptom}
+                      </button>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+
             {/* Quick Categories */}
             <div className="space-y-4">
               <h2 className="text-xl font-semibold text-foreground text-center">

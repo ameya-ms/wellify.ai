@@ -58,7 +58,7 @@ const Home = () => {
         </div>
 
         {/* Centered Content */}
-        <div className="container mx-auto px-4 text-center py-32">
+        <div className="container mx-auto px-4 text-center py-48">
           <ScrollReveal>
             <div className="max-w-4xl mx-auto space-y-8">
               <h1 className="text-5xl md:text-7xl font-bold text-foreground leading-tight">
@@ -223,7 +223,7 @@ const Home = () => {
             <Card className="bg-gradient-to-br from-primary/20 via-primary/10 to-accent/20 border-primary/30 shadow-2xl shadow-primary/30 backdrop-blur-sm">
               <CardContent className="p-12 text-center space-y-6">
                 <h2 className="text-4xl font-bold text-foreground">Not Feeling Well?</h2>
-                <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+                <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-4">
                   Start by checking your symptoms. We'll show you exactly where to go and help you get there.
                 </p>
                 <Link to="/symptoms">
