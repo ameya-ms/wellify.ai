@@ -208,26 +208,26 @@ const Home = () => {
             {benefits.map((benefit, index) => (
               <div
                 key={benefit.title}
-                className={`grid lg:grid-cols-2 gap-12 items-center ${index % 2 === 1 ? "lg:grid-flow-dense" : ""}`}
+                className="grid lg:grid-cols-2 gap-12 items-center"
               >
-                <ScrollReveal direction={index % 2 === 0 ? "left" : "right"} delay={100}>
-                  <div className={`space-y-6 ${index % 2 === 1 ? "lg:col-start-2" : ""}`}>
-                    <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
-                      <benefit.icon className="w-6 h-6 text-primary" />
-                    </div>
-                    <h3 className="text-3xl font-bold text-foreground">{benefit.title}</h3>
-                    <p className="text-lg text-muted-foreground">{benefit.description}</p>
-                  </div>
-                </ScrollReveal>
-
-                <ScrollReveal direction={index % 2 === 0 ? "right" : "left"} delay={200}>
-                  <div className={`relative ${index % 2 === 1 ? "lg:col-start-1 lg:row-start-1" : ""}`}>
+                <ScrollReveal direction="left" delay={100}>
+                  <div className="relative">
                     <div className="absolute -inset-4 bg-primary/20 blur-3xl rounded-full" />
                     <img
                       src={benefit.image}
                       alt={benefit.title}
                       className="relative rounded-2xl shadow-2xl w-full h-auto"
                     />
+                  </div>
+                </ScrollReveal>
+
+                <ScrollReveal direction="right" delay={200}>
+                  <div className="space-y-6">
+                    <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
+                      <benefit.icon className="w-6 h-6 text-primary" />
+                    </div>
+                    <h3 className="text-3xl font-bold text-foreground">{benefit.title}</h3>
+                    <p className="text-lg text-muted-foreground">{benefit.description}</p>
                   </div>
                 </ScrollReveal>
               </div>

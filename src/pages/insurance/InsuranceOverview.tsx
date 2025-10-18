@@ -1,14 +1,19 @@
 import { Link } from "react-router-dom";
-import { Shield, FileText, HelpCircle, Upload, CheckCircle } from "lucide-react";
+import { Shield, FileText, HelpCircle, Upload, CheckCircle, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import uhcLogo from "@/assets/insurance/uhc-logo.png";
+import cignaLogo from "@/assets/insurance/cigna-logo.png";
+import medicareLogo from "@/assets/insurance/medicare-logo.png";
+import bcbsLogo from "@/assets/insurance/bcbs-logo.png";
 
 const InsuranceOverview = () => {
-  const quickStats = [
-    { label: "Active Plan", value: "UW Student Health", icon: Shield },
-    { label: "Annual Deductible", value: "$500", icon: FileText },
-    { label: "Out-of-Pocket Max", value: "$2,500", icon: CheckCircle },
+  const insuranceProviders = [
+    { name: "UnitedHealthcare", logo: uhcLogo, links: ["300", "307", "323"] },
+    { name: "Cigna", logo: cignaLogo, links: ["356", "854"] },
+    { name: "Medicare", logo: medicareLogo, links: ["300", "307"] },
+    { name: "Blue Cross Blue Shield", logo: bcbsLogo, links: ["323", "356"] },
   ];
 
   const coverageHighlights = [
@@ -71,28 +76,63 @@ const InsuranceOverview = () => {
           </CardContent>
         </Card>
 
-        {/* Quick Stats */}
-        <div className="grid md:grid-cols-3 gap-6 mb-12">
-          {quickStats.map((stat, index) => (
-            <Card 
-              key={stat.label} 
-              className="border-border hover:shadow-lg transition-all animate-fade-in-up group"
-              style={{ animationDelay: `${(index + 2) * 100}ms` }}
-            >
-              <CardContent className="p-6">
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center group-hover:scale-110 transition-transform">
-                    <stat.icon className="w-6 h-6 text-primary" />
-                  </div>
-                  <div>
-                    <p className="text-sm text-muted-foreground">{stat.label}</p>
-                    <p className="text-2xl font-bold text-foreground">{stat.value}</p>
-                  </div>
+        {/* Insurance Providers */}
+        <Card className="mb-12 border-border animate-fade-in-up" style={{ animationDelay: "200ms" }}>
+          <CardContent className="p-8">
+            <div className="space-y-6">
+              <div className="text-center space-y-2">
+                <h3 className="text-2xl font-semibold text-foreground">Add your insurance to see in-network primary care doctors</h3>
+                <p className="text-muted-foreground">Select your insurance provider to get started</p>
+              </div>
+              
+              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+                {insuranceProviders.map((provider, index) => (
+                  <Card 
+                    key={provider.name}
+                    className="border-border/50 hover:border-primary/50 hover:shadow-lg transition-all cursor-pointer group"
+                    style={{ animationDelay: `${(index + 3) * 100}ms` }}
+                  >
+                    <CardContent className="p-6 space-y-4">
+                      <div className="h-16 flex items-center justify-center bg-white/5 rounded-lg p-3 group-hover:bg-white/10 transition-colors">
+                        <img 
+                          src={provider.logo} 
+                          alt={provider.name}
+                          className="max-h-full max-w-full object-contain"
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <p className="font-semibold text-foreground text-center">{provider.name}</p>
+                        <div className="flex flex-wrap gap-2 justify-center">
+                          {provider.links.map((link) => (
+                            <Badge 
+                              key={link} 
+                              variant="outline" 
+                              className="text-xs bg-primary/10 text-primary border-primary/30"
+                            >
+                              {link}
+                            </Badge>
+                          ))}
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+
+              <div className="text-center space-y-4 pt-4">
+                <Button variant="link" className="text-primary hover:text-primary/80">
+                  See all (1,000+) providers
+                </Button>
+                <div>
+                  <Button size="lg" className="hover:scale-105 transition-transform">
+                    <Plus className="w-4 h-4 mr-2" />
+                    Add your insurance coverage
+                  </Button>
                 </div>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
 
         {/* Coverage Highlights */}
         <div className="mb-12">
