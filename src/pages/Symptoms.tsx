@@ -34,9 +34,9 @@ const Symptoms = () => {
     {
       id: "hall-health",
       name: "Hall Health Center",
-      location: "UW Campus - NE Campus Parkway",
-      waitTime: "25-35 min",
-      specialty: "Primary Care & Same-Day Visits",
+      location: "3920 NE Stevens Way, Seattle, WA 98195",
+      waitTime: "25 min",
+      specialty: "Primary care clinic serving UW students and faculty",
       services: ["Cold & Flu", "Minor Injuries", "Wellness Checks"],
       severity: "low",
       distance: "0.3 miles",
@@ -44,9 +44,9 @@ const Symptoms = () => {
     {
       id: "uw-urgent-care",
       name: "UW Medical Center - Urgent Care",
-      location: "Roosevelt Way NE",
-      waitTime: "45-55 min",
-      specialty: "Urgent Care & Walk-ins",
+      location: "4245 Roosevelt Way NE, Seattle, WA 98105",
+      waitTime: "35 min",
+      specialty: "Urgent care for non-emergency medical needs",
       services: ["Sprains", "Infections", "Diagnostic Tests"],
       severity: "medium",
       distance: "1.2 miles",
@@ -54,9 +54,9 @@ const Symptoms = () => {
     {
       id: "uwmc",
       name: "UW Medical Center",
-      location: "Montlake Blvd NE",
-      waitTime: "1-2 hours",
-      specialty: "Emergency & Specialized Care",
+      location: "1959 NE Pacific St, Seattle, WA 98195",
+      waitTime: "45 min",
+      specialty: "Full-service hospital with 24/7 emergency care",
       services: ["Emergency Care", "Specialist Referrals", "Advanced Treatment"],
       severity: "medium",
       distance: "1.8 miles",
@@ -308,65 +308,72 @@ const Symptoms = () => {
                     className="hover:shadow-2xl transition-all duration-300 border-border/50 backdrop-blur-sm animate-fade-in-up"
                     style={{ animationDelay: `${index * 100}ms` }}
                   >
-                    <CardHeader className="pb-4">
-                      <div className="flex items-start justify-between">
-                        <div className="space-y-2">
+                    <CardHeader className="pb-3">
+                      <div className="space-y-2">
+                        <div className="flex items-start justify-between gap-4">
                           <CardTitle className="text-2xl text-foreground">
                             {facility.name}
                           </CardTitle>
-                          <div className="flex items-center gap-2 text-muted-foreground">
-                            <MapPin className="w-4 h-4" />
-                            <span className="text-sm">{facility.location}</span>
-                            <span className="text-sm">• {facility.distance}</span>
-                          </div>
+                          {index === 0 && (
+                            <Badge className="bg-primary text-primary-foreground">
+                              Recommended
+                            </Badge>
+                          )}
                         </div>
-                        <Badge className={getSeverityColor(facility.severity)}>
-                          Best Match
-                        </Badge>
+                        <p className="text-muted-foreground text-sm">
+                          {facility.specialty}
+                        </p>
                       </div>
                     </CardHeader>
                     <CardContent className="space-y-4">
-                      <div className="grid md:grid-cols-2 gap-4">
-                        <div className="flex items-center gap-3 p-3 bg-muted/50 rounded-lg">
-                          <Clock className="w-5 h-5 text-primary" />
-                          <div>
-                            <div className="text-xs text-muted-foreground">Wait Time</div>
-                            <div className="font-semibold text-foreground">{facility.waitTime}</div>
-                          </div>
-                        </div>
-                        <div className="flex items-center gap-3 p-3 bg-muted/50 rounded-lg">
-                          <Stethoscope className="w-5 h-5 text-primary" />
-                          <div>
-                            <div className="text-xs text-muted-foreground">Specialty</div>
-                            <div className="font-semibold text-foreground text-sm">{facility.specialty}</div>
-                          </div>
-                        </div>
-                      </div>
-
+                      {/* Hours */}
                       <div>
-                        <div className="text-sm font-medium text-foreground mb-2">Services Available:</div>
-                        <div className="flex flex-wrap gap-2">
-                          {facility.services.map((service) => (
-                            <Badge key={service} variant="secondary" className="text-xs">
-                              {service}
-                            </Badge>
-                          ))}
+                        <h4 className="font-semibold text-foreground mb-2">Hours</h4>
+                        <div className="flex justify-between text-sm">
+                          <span className="text-muted-foreground">Monday-Sunday</span>
+                          <span className="text-foreground">24 Hours - 24 Hours</span>
                         </div>
                       </div>
 
-                      <div className="flex gap-3 pt-2">
-                        <Button className="flex-1 bg-[hsl(0_0%_0%)] hover:bg-[hsl(0_0%_10%)] text-white">
-                          <Car className="w-4 h-4 mr-2" />
-                          Request Uber
-                        </Button>
-                        <Button className="flex-1 bg-[hsl(330_100%_50%)] hover:bg-[hsl(330_100%_40%)] text-white">
-                          <Car className="w-4 h-4 mr-2" />
-                          Request Lyft
-                        </Button>
-                        <Button variant="outline" className="border-primary text-primary hover:bg-primary/10">
-                          <MapPin className="w-4 h-4 mr-2" />
-                          Directions
-                        </Button>
+                      {/* Estimated Wait Time */}
+                      <div>
+                        <h4 className="font-semibold text-foreground mb-2">Estimated Wait Time</h4>
+                        <p className="text-sm text-foreground">{facility.waitTime}</p>
+                      </div>
+
+                      {/* Location */}
+                      <div>
+                        <h4 className="font-semibold text-foreground mb-2">Location</h4>
+                        <p className="text-sm text-foreground">{facility.location}</p>
+                      </div>
+
+                      {/* Get Directions */}
+                      <div>
+                        <h4 className="font-semibold text-foreground mb-3">Get Directions:</h4>
+                        <div className="flex gap-3">
+                          <Button className="flex-1 bg-[hsl(0_0%_0%)] hover:bg-[hsl(0_0%_10%)] text-white">
+                            <Car className="w-4 h-4 mr-2" />
+                            Uber
+                          </Button>
+                          <Button className="flex-1 bg-[hsl(330_100%_50%)] hover:bg-[hsl(330_100%_40%)] text-white">
+                            <Car className="w-4 h-4 mr-2" />
+                            Lyft
+                          </Button>
+                        </div>
+                      </div>
+
+                      {/* Contact */}
+                      <div>
+                        <h4 className="font-semibold text-foreground mb-2">Contact</h4>
+                        <div className="flex items-center gap-3 text-sm">
+                          <a href="tel:(206)598-3300" className="text-primary hover:underline">
+                            (206) 598-3300
+                          </a>
+                          <span className="text-muted-foreground">•</span>
+                          <a href="#" className="text-primary hover:underline">
+                            Visit MyChart
+                          </a>
+                        </div>
                       </div>
                     </CardContent>
                   </Card>
