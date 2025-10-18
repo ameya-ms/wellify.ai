@@ -92,27 +92,6 @@ export const SymptomSearch = ({ onSymptomChange }: SymptomSearchProps) => {
           ))}
         </div>
       )}
-
-      {/* Selected symptoms */}
-      {selectedSymptoms.length > 0 && (
-        <div className="flex flex-wrap gap-2 mt-4 animate-fade-in">
-          {selectedSymptoms.map((symptom) => (
-            <Badge
-              key={symptom}
-              variant="secondary"
-              className="px-3 py-1.5 text-sm flex items-center gap-2 hover:bg-primary/10 transition-colors"
-            >
-              {symptom}
-              <button
-                onClick={() => removeSymptom(symptom)}
-                className="hover:text-destructive"
-              >
-                <X className="h-3 w-3" />
-              </button>
-            </Badge>
-          ))}
-        </div>
-      )}
     </div>
   );
 };
