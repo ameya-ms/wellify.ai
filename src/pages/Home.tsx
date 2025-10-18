@@ -32,8 +32,8 @@ const Home = () => {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative pt-24 pb-20 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5 animate-gradient-shift" style={{ backgroundSize: "200% 200%" }} />
+      <section className="relative pt-24 pb-20 overflow-hidden bg-gradient-to-b from-background via-background to-muted/30">
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-accent/10 animate-gradient-shift" style={{ backgroundSize: "200% 200%" }} />
         <div className="container mx-auto px-4 relative">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-8 animate-fade-in-up">
@@ -75,7 +75,7 @@ const Home = () => {
       </section>
 
       {/* Features Section */}
-      <section className="py-20 bg-secondary/30">
+      <section className="py-20 bg-muted/30">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12 space-y-4">
             <h2 className="text-4xl font-bold text-primary">How We Help</h2>
@@ -87,7 +87,7 @@ const Home = () => {
             {features.map(({ icon: Icon, title, description }, index) => (
               <Card 
                 key={title} 
-                className="border-border hover:shadow-lg transition-all duration-300 hover:-translate-y-2 bg-card/50 backdrop-blur-sm animate-fade-in-up group"
+                className="border-border/50 hover:border-primary/50 hover:shadow-2xl hover:shadow-primary/20 transition-all duration-300 hover:-translate-y-2 bg-card/80 backdrop-blur-sm animate-fade-in-up group"
                 style={{ animationDelay: `${index * 100}ms` }}
               >
                 <CardContent className="p-6 space-y-4">
@@ -106,16 +106,16 @@ const Home = () => {
       {/* CTA Section */}
       <section className="py-20">
         <div className="container mx-auto px-4">
-          <Card className="bg-gradient-hero border-0 shadow-2xl">
+          <Card className="bg-gradient-to-br from-primary/20 via-primary/10 to-accent/20 border-primary/30 shadow-2xl shadow-primary/30 backdrop-blur-sm">
             <CardContent className="p-12 text-center space-y-6">
-              <h2 className="text-4xl font-bold text-primary-foreground">
+              <h2 className="text-4xl font-bold text-foreground">
                 Not Feeling Well?
               </h2>
-              <p className="text-xl text-primary-foreground/90 max-w-2xl mx-auto">
+              <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
                 Start by checking your symptoms. We'll show you exactly where to go and help you get there.
               </p>
               <Link to="/symptoms">
-                <Button size="lg" variant="secondary" className="shadow-lg hover:shadow-xl">
+                <Button size="lg" className="shadow-lg hover:shadow-xl hover:shadow-primary/50 hover:scale-105 transition-all">
                   Get Started Now
                 </Button>
               </Link>
