@@ -226,7 +226,9 @@ const Home = () => {
                 <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-4">
                   Start by checking your symptoms. We'll show you exactly where to go and help you get there.
                   <br />
+                   
                 </p>
+                <br />
                 <Link to="/symptoms">
                   <Button
                     size="lg"
