@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import heroImage from "@/assets/hero-image.jpg";
-import uwLogo from "@/assets/uw-logo-transparent.png";
 import hallHealthExterior from "@/assets/hall-health-exterior.jpg";
 import studentsApp from "@/assets/students-app.jpg";
 import doctorConsultation from "@/assets/doctor-consultation.jpg";
@@ -60,10 +59,6 @@ const Home = () => {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <ScrollReveal direction="left">
               <div className="space-y-8">
-                <div className="flex items-center gap-3 mb-4">
-                  <img src={uwLogo} alt="UW Logo" className="w-16 h-16" />
-                  <span className="text-lg font-semibold text-muted-foreground">University of Washington</span>
-                </div>
                 <div className="space-y-4">
                   <h1 className="text-5xl md:text-6xl font-bold text-foreground leading-tight">
                     Taking Get Well Soon Literally

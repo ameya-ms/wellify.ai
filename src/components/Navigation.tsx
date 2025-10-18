@@ -1,7 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 import { Activity, Home, Pill, Shield } from "lucide-react";
 import { cn } from "@/lib/utils";
-import uwLogo from "@/assets/uw-logo-transparent.png";
 
 const Navigation = () => {
   const location = useLocation();
@@ -18,11 +17,6 @@ const Navigation = () => {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           <Link to="/" className="flex items-center space-x-3 group">
-            <img 
-              src={uwLogo} 
-              alt="University of Washington" 
-              className="w-10 h-10 object-contain group-hover:scale-105 transition-transform"
-            />
             <span className="text-xl font-bold text-foreground">wellify.ai</span>
           </Link>
           
