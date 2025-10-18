@@ -52,7 +52,10 @@ const Home = () => {
     <div className="min-h-screen">
       {/* Hero Section */}
       <section className="relative pt-24 pb-20 overflow-hidden bg-gradient-to-b from-background via-background to-muted/30">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-accent/10 animate-gradient-shift" style={{ backgroundSize: "200% 200%" }} />
+        <div
+          className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-accent/10 animate-gradient-shift"
+          style={{ backgroundSize: "200% 200%" }}
+        />
         <div className="container mx-auto px-4 relative">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <ScrollReveal direction="left">
@@ -63,21 +66,29 @@ const Home = () => {
                 </div>
                 <div className="space-y-4">
                   <h1 className="text-5xl md:text-6xl font-bold text-foreground leading-tight">
-                    Making Being Sick Easier at UW
+                    Taking Get Well Soon Literally
                   </h1>
                   <p className="text-xl text-muted-foreground">
-                    Navigate healthcare with confidence. Find care, order meds, and understand your insurance—all in one place.
+                    Navigate healthcare with confidence. Find care, order meds, and understand your insurance—all in one
+                    place.
                   </p>
                 </div>
                 <div className="flex flex-col sm:flex-row gap-4">
                   <Link to="/symptoms">
-                    <Button size="lg" className="w-full sm:w-auto shadow-lg hover:shadow-primary/50 hover:scale-105 transition-all group">
+                    <Button
+                      size="lg"
+                      className="w-full sm:w-auto shadow-lg hover:shadow-primary/50 hover:scale-105 transition-all group"
+                    >
                       Check Your Symptoms
                       <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
                     </Button>
                   </Link>
                   <Link to="/insurance">
-                    <Button size="lg" variant="outline" className="w-full sm:w-auto border-primary/50 text-foreground hover:bg-primary/10 hover:border-primary">
+                    <Button
+                      size="lg"
+                      variant="outline"
+                      className="w-full sm:w-auto border-primary/50 text-foreground hover:bg-primary/10 hover:border-primary"
+                    >
                       Insurance Help
                     </Button>
                   </Link>
@@ -88,7 +99,7 @@ const Home = () => {
             <ScrollReveal direction="right" delay={200}>
               <div className="relative">
                 <div className="absolute -inset-4 bg-primary/20 blur-3xl rounded-full animate-pulse" />
-                <img 
+                <img
                   src={heroImage}
                   alt="Happy UW students feeling better"
                   className="relative rounded-2xl shadow-2xl w-full h-auto transform hover:scale-105 transition-transform duration-500"
@@ -136,7 +147,7 @@ const Home = () => {
             <ScrollReveal direction="left">
               <div className="relative">
                 <div className="absolute -inset-4 bg-accent/20 blur-3xl rounded-full" />
-                <img 
+                <img
                   src={hallHealthExterior}
                   alt="Hall Health Center exterior"
                   className="relative rounded-2xl shadow-2xl w-full h-auto"
@@ -149,18 +160,17 @@ const Home = () => {
                 <div className="inline-block px-4 py-2 bg-primary/10 rounded-full">
                   <span className="text-primary font-semibold">On-Campus Care</span>
                 </div>
-                <h2 className="text-4xl font-bold text-foreground">
-                  Your Health, Steps Away
-                </h2>
+                <h2 className="text-4xl font-bold text-foreground">Your Health, Steps Away</h2>
                 <p className="text-lg text-muted-foreground">
-                  Hall Health Center is right on campus, making it easy to get the care you need without disrupting your schedule. From cold and flu to mental health support, we're here for you.
+                  Hall Health Center is right on campus, making it easy to get the care you need without disrupting your
+                  schedule. From cold and flu to mental health support, we're here for you.
                 </p>
                 <ul className="space-y-3">
                   {[
                     "Walk-in appointments available",
                     "Same-day urgent care",
                     "Mental health counseling",
-                    "Pharmacy on-site"
+                    "Pharmacy on-site",
                   ].map((item, index) => (
                     <li key={index} className="flex items-center gap-3 text-foreground">
                       <div className="w-6 h-6 rounded-full bg-success/20 flex items-center justify-center flex-shrink-0">
@@ -196,25 +206,24 @@ const Home = () => {
 
           <div className="space-y-24">
             {benefits.map((benefit, index) => (
-              <div key={benefit.title} className={`grid lg:grid-cols-2 gap-12 items-center ${index % 2 === 1 ? 'lg:grid-flow-dense' : ''}`}>
+              <div
+                key={benefit.title}
+                className={`grid lg:grid-cols-2 gap-12 items-center ${index % 2 === 1 ? "lg:grid-flow-dense" : ""}`}
+              >
                 <ScrollReveal direction={index % 2 === 0 ? "left" : "right"} delay={100}>
-                  <div className={`space-y-6 ${index % 2 === 1 ? 'lg:col-start-2' : ''}`}>
+                  <div className={`space-y-6 ${index % 2 === 1 ? "lg:col-start-2" : ""}`}>
                     <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
                       <benefit.icon className="w-6 h-6 text-primary" />
                     </div>
-                    <h3 className="text-3xl font-bold text-foreground">
-                      {benefit.title}
-                    </h3>
-                    <p className="text-lg text-muted-foreground">
-                      {benefit.description}
-                    </p>
+                    <h3 className="text-3xl font-bold text-foreground">{benefit.title}</h3>
+                    <p className="text-lg text-muted-foreground">{benefit.description}</p>
                   </div>
                 </ScrollReveal>
 
                 <ScrollReveal direction={index % 2 === 0 ? "right" : "left"} delay={200}>
-                  <div className={`relative ${index % 2 === 1 ? 'lg:col-start-1 lg:row-start-1' : ''}`}>
+                  <div className={`relative ${index % 2 === 1 ? "lg:col-start-1 lg:row-start-1" : ""}`}>
                     <div className="absolute -inset-4 bg-primary/20 blur-3xl rounded-full" />
-                    <img 
+                    <img
                       src={benefit.image}
                       alt={benefit.title}
                       className="relative rounded-2xl shadow-2xl w-full h-auto"
@@ -233,14 +242,15 @@ const Home = () => {
           <ScrollReveal direction="scale">
             <Card className="bg-gradient-to-br from-primary/20 via-primary/10 to-accent/20 border-primary/30 shadow-2xl shadow-primary/30 backdrop-blur-sm">
               <CardContent className="p-12 text-center space-y-6">
-                <h2 className="text-4xl font-bold text-foreground">
-                  Not Feeling Well?
-                </h2>
+                <h2 className="text-4xl font-bold text-foreground">Not Feeling Well?</h2>
                 <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
                   Start by checking your symptoms. We'll show you exactly where to go and help you get there.
                 </p>
                 <Link to="/symptoms">
-                  <Button size="lg" className="shadow-lg hover:shadow-xl hover:shadow-primary/50 hover:scale-105 transition-all">
+                  <Button
+                    size="lg"
+                    className="shadow-lg hover:shadow-xl hover:shadow-primary/50 hover:scale-105 transition-all"
+                  >
                     Get Started Now
                     <ArrowRight className="ml-2 w-4 h-4" />
                   </Button>
