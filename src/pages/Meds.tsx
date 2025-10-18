@@ -45,10 +45,10 @@ const Meds = () => {
       <div className="container mx-auto px-4 max-w-6xl">
         {/* Header */}
         <div className="relative text-center mb-16 space-y-4 animate-fade-in-up">
-          <div className="absolute inset-0 -z-10 opacity-10 rounded-2xl overflow-hidden">
+          <div className="absolute inset-0 -z-10 opacity-10 rounded-2xl overflow-hidden h-64">
             <img src={thermometer} alt="" className="w-full h-full object-cover" />
           </div>
-          <div className="py-12">
+          <div className="py-20">
             <h1 className="text-4xl md:text-5xl font-bold text-foreground">
               Medications & Supplies
             </h1>
