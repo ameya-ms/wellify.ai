@@ -1,67 +1,3 @@
-# from fastapi import FastAPI, Request
-# from fastapi.middleware.cors import CORSMiddleware
-# import boto3
-# import json
-# import os
-
-# app = FastAPI()
-
-# # Allow frontend requests
-# app.add_middleware(
-#     CORSMiddleware,
-#     allow_origins=["*"],  # restrict later in production
-#     allow_credentials=True,
-#     allow_methods=["*"],
-#     allow_headers=["*"],
-# )
-
-# bedrock = None
-
-# # Attempt to create Bedrock client and log issues
-# try:
-#     print("Attempting to create Bedrock client...")
-#     bedrock = boto3.client(
-#         service_name="bedrock-runtime",
-#         region_name="us-west-2"  # ensure this is a supported Bedrock region
-#     )
-#     print("Bedrock client created successfully!")
-# except Exception as e:
-#     print("Failed to create Bedrock client:", e)
-
-# @app.post("/chat")
-# async def chat(request: Request):
-#     data = await request.json()
-#     user_input = data.get("message", "")
-
-#     if bedrock:
-#         print("Calling Bedrock with user input:", user_input)
-#         body = json.dumps({
-#             "messages": [{"role": "user", "content": user_input}]
-#         })
-#         try:
-#             response = bedrock.invoke_model(
-#                 modelId="anthropic.claude-3-5-sonnet-20240620-v1:0",
-#                 #modelId="anthropic.claude-3-sonnet-20240229-v1:0",
-#                 contentType="application/json",
-#                 accept="application/json",
-#                 body=body
-#             )
-#             result = json.loads(response["body"].read())
-#             ai_output = result["content"][0]["text"]
-#             print("Bedrock response:", ai_output)
-#         except Exception as e:
-#             print("Error calling Bedrock:", e)
-#             ai_output = "Sorry, I couldn't get a response from Bedrock."
-#     else:
-#         print("Bedrock client not initialized. Returning mock response.")
-#         ai_output = f"Echo: {user_input}"
-
-#     return {"reply": ai_output}
-
-
-
-
-
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 import boto3
@@ -72,6 +8,7 @@ from pydantic import BaseModel
 import joblib
 import numpy as np
 import uvicorn
+from pdf_utils import load_insurance_documents
 
 app = FastAPI()
 
@@ -141,41 +78,71 @@ if __name__ == "__main__":
 # Allow frontend requests
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # restrict later in production
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-bedrock = None
+# -------------------------------
+# Paths
+# -------------------------------
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+DATA_FOLDER = os.path.join(BASE_DIR, "data")
 
-# Attempt to create Bedrock client and log issues
+# -------------------------------
+# Load insurance PDFs
+# -------------------------------
+print("📥 Loading insurance PDFs from:", DATA_FOLDER)
+insurance_context = load_insurance_documents(DATA_FOLDER)
+print(f"📄 Loaded {len(insurance_context)} characters of insurance data")
+print(insurance_context[:1000])  # first 1k chars for sanity check
+
+# -------------------------------
+# Bedrock client
+# -------------------------------
+bedrock = None
 try:
-    print("Attempting to create Bedrock client...")
+    print("🔄 Attempting to create Bedrock client...")
     bedrock = boto3.client(
         service_name="bedrock-runtime",
-        region_name="us-west-2"  # ensure this is a supported Bedrock region
+        region_name="us-west-2"
     )
-    print("Bedrock client created successfully!")
+    print("✅ Bedrock client created successfully!")
 except Exception as e:
-    print("Failed to create Bedrock client:", e)
+    print("❌ Failed to create Bedrock client:", e)
 
-
+# -------------------------------
+# Chat endpoint
+# -------------------------------
 @app.post("/chat")
 async def chat(request: Request):
     data = await request.json()
     user_input = data.get("message", "")
-    
+
     if bedrock:
-        print("Calling Bedrock with user input:", user_input)
-        
-        # ✅ Correct format with all required parameters
+        print(f"💬 Calling Bedrock with user input: {user_input}")
+
+        context = insurance_context[:12000] if insurance_context else ""
+
+        # Prompt structure
         body = json.dumps({
             "anthropic_version": "bedrock-2023-05-31",
             "max_tokens": 1024,
-            "messages": [{"role": "user", "content": user_input}]
+            "messages": [
+                {
+                    "role": "user",
+                    "content": (
+                        "You are Wellify, an assistant that ONLY answers questions using the provided "
+                        "U.S. health insurance plan data. Do NOT make assumptions beyond the data.\n\n"
+                        f"Insurance plan data:\n{context}\n\n"
+                        f"User question: {user_input}\n\n"
+                        "If the answer isn't found in the data, respond: 'Not mentioned in plan data.'"
+                    )
+                }
+            ]
         })
-        
+
         try:
             response = bedrock.invoke_model(
                 modelId="anthropic.claude-3-5-sonnet-20240620-v1:0",
@@ -183,25 +150,24 @@ async def chat(request: Request):
                 accept="application/json",
                 body=body
             )
-            
+
             result = json.loads(response["body"].read())
             ai_output = result["content"][0]["text"]
-            print("Bedrock response:", ai_output)
-            
-        except Exception as e:
-            print("Error calling Bedrock:", e)
-            ai_output = f"Bedrock Error: {str(e)}"
-    else:
-        print("Bedrock client not initialized. Returning mock response.")
-        ai_output = f"Echo: {user_input}"
-    
-    return {"reply": ai_output}
+            print("✅ Bedrock response:", ai_output)
 
+        except Exception as e:
+            print("❌ Error calling Bedrock:", e)
+            ai_output = f"Bedrock Error: {str(e)}"
+
+    else:
+        print("⚠️ Bedrock client not initialized. Returning mock response.")
+        ai_output = f"Echo: {user_input}"
+
+    return {"reply": ai_output}
 
 @app.get("/")
 async def root():
     return {"message": "UW Insurance Coverage API is running"}
-
 
 if __name__ == "__main__":
     import uvicorn
