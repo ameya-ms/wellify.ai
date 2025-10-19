@@ -3,26 +3,16 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Mic, MicOff } from "lucide-react";
 
-type Classification = {
-  age?: string;
-  gender?: string;
-  symptom_code?: string;
-  urgency?: string;
-  time_of_day?: string;
-  wait_load_A?: string;
-  wait_load_B?: string;
-  wait_load_C?: string;
-  specialty_match_A?: string;
-  specialty_match_B?: string;
-  specialty_match_C?: string;
-};
+interface SymptomClassifierProps {
+  onSymptomsExtracted?: (symptoms: string[]) => void;
+}
 
-export default function SymptomClassifier() {
+export default function SymptomClassifier({ onSymptomsExtracted }: SymptomClassifierProps) {
   const [text, setText] = useState("");
   const [loading, setLoading] = useState(false);
-  const [result, setResult] = useState<Classification | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [listening, setListening] = useState(false);
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const recognitionRef = React.useRef<any>(null);
 
   const supportsSpeech = typeof window !== "undefined" && (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
@@ -88,16 +78,26 @@ export default function SymptomClassifier() {
   const classify = async () => {
     setLoading(true);
     setError(null);
-    setResult(null);
+    setSuccessMessage(null);
     try {
-      const resp = await fetch("/api/classify", {
+      const resp = await fetch("http://localhost:8081/api/classify", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ text }),
       });
       if (!resp.ok) throw new Error(`Server error ${resp.status}`);
       const data = await resp.json();
-      setResult(data);
+      
+      // Extract symptoms from the response
+      if (data.symptoms && data.symptoms.length > 0) {
+        if (onSymptomsExtracted) {
+          onSymptomsExtracted(data.symptoms);
+        }
+        setSuccessMessage(`Found ${data.symptoms.length} symptom(s): ${data.symptoms.join(", ")}`);
+        setText(""); // Clear the text after successful extraction
+      } else {
+        setError("No symptoms found in the text. Please try describing your symptoms differently.");
+      }
     } catch (err: any) {
       setError(err.message || String(err));
     } finally {
@@ -113,15 +113,15 @@ export default function SymptomClassifier() {
             value={text}
             onChange={(e) => setText(e.target.value)}
             rows={4}
-            placeholder="Type symptoms here (e.g. 'I've had fever and cough since yesterday')"
+            placeholder="Type or speak symptoms here (e.g. 'I've had fever and cough since yesterday')"
             className="w-full p-3 rounded-lg bg-card text-foreground placeholder:text-muted-foreground outline-none"
           />
 
           <div className="flex items-center gap-3">
             <Button onClick={classify} disabled={!text.trim() || loading}>
-              {loading ? "Classifying…" : "Classify"}
+              {loading ? "Classifying…" : "Submit"}
             </Button>
-            <Button variant="outline" onClick={() => { setText(""); setResult(null); setError(null); }}>
+            <Button variant="outline" onClick={() => { setText(""); setError(null); setSuccessMessage(null); }}>
               Clear
             </Button>
             {/* Microphone control */}
@@ -136,21 +136,7 @@ export default function SymptomClassifier() {
           </div>
 
           {error && <div className="text-destructive text-sm">{error}</div>}
-
-          {result && (
-            <div className="overflow-auto">
-              <table className="w-full text-sm table-fixed">
-                <tbody>
-                  {Object.entries(result).map(([k, v]) => (
-                    <tr key={k} className="border-t border-border">
-                      <td className="py-2 font-medium w-40 capitalize">{k.replace(/_/g, " ")}</td>
-                      <td className="py-2">{v}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          )}
+          {successMessage && <div className="text-green-600 text-sm">{successMessage}</div>}
         </div>
       </CardContent>
     </Card>
