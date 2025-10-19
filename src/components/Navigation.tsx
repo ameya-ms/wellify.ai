@@ -1,6 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
 import { Activity, Home, Pill, Shield } from "lucide-react";
 import { cn } from "@/lib/utils";
+import logo from "@/assets/insurance/wellify_logo.png";
 
 const Navigation = () => {
   const location = useLocation();
@@ -17,7 +18,13 @@ const Navigation = () => {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           <Link to="/" className="flex items-center space-x-3 group">
-            <span className="text-xl font-bold text-foreground">wellify.ai</span>
+              {/* constrain by height so it never overflows the nav; keep aspect ratio with w-auto */}
+              <img
+                src={logo}
+                alt="Wellify logo"
+                className="h-12 md:h-16 w-auto object-contain bg-transparent ml-2"
+              />
+            <span className="sr-only">wellify.ai</span>
           </Link>
           
           <div className="hidden md:flex items-center space-x-1">
