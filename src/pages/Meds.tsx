@@ -5,6 +5,8 @@ import { Badge } from "@/components/ui/badge";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 import PrescriptionCardDetails from "@/components/PrescriptionCardDetails";
+import DoorDashOrder from "@/components/DoorDashOrder";
+import WalgreensBuy from "@/components/WalgreensBuy";
 import chickenSoup from "@/assets/chicken-soup.jpg";
 import gingerTea from "@/assets/ginger-tea.jpg";
 import tissues from "@/assets/tissues.jpg";
@@ -168,10 +170,13 @@ const Meds = () => {
                         </Badge>
                       </div>
                       <div className="flex gap-2">
-                        <Button size="sm" className="flex-1 bg-[#FF6B6B] hover:bg-[#FF6B6B]/90 text-white text-xs">
-                          <Truck className="w-3 h-3 mr-1" />
-                          DoorDash
-                        </Button>
+                        <DoorDashOrder 
+                          itemName={item.name}
+                          itemCategory={item.category}
+                          onOrderComplete={(orderId) => {
+                            console.log('DoorDash order completed:', orderId);
+                          }}
+                        />
                         <Button size="sm" className="flex-1 bg-[#FF9F00] hover:bg-[#FF9F00]/90 text-white text-xs">
                           <ShoppingBag className="w-3 h-3 mr-1" />
                           Instacart
