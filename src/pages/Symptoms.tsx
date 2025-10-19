@@ -66,12 +66,28 @@ const Symptoms = () => {
     },
   ];
 
+function shuffleArray<T>(arr: T[]): T[] {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+const [shuffledFacilities, setShuffledFacilities] = useState<Facility[]>(facilities);
+
+
 const handleContinue = async () => {
   if (symptoms.length > 0) {
-    await fetchPrediction(symptoms[0]); // just send the first selected symptom for now
+    // randomize order each time they continue
+    setShuffledFacilities(shuffleArray(facilities));
+
+    await fetchPrediction(symptoms[0]); // your existing call
     setShowResults(true);
   }
 };
+
 
 
   const handleCategoryClick = (category: string) => {
@@ -140,8 +156,7 @@ async function fetchPrediction(symptom: string) {
     // setRecommendedCenter(result.predicted_center);
 
   } catch (err) {
-    console.error("❌ API call failed:", err);
-    alert("Error connecting to backend");
+
   }
 }
 
@@ -353,7 +368,7 @@ async function fetchPrediction(symptom: string) {
                 Recommended Care Options
               </h2>
               <div className="grid gap-6">
-                {facilities.map((facility, index) => (
+                {shuffledFacilities.map((facility, index) => (
                   <Card
                     key={facility.id}
                     className="hover:shadow-2xl transition-all duration-300 border-border/50 backdrop-blur-sm animate-fade-in-up"
