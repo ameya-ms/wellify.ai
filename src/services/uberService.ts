@@ -25,6 +25,7 @@ export interface UberBookingResult {
   success: boolean;
   rideId?: string;
   deepLink?: string;
+  rideType?: string;
   error?: string;
 }
 
