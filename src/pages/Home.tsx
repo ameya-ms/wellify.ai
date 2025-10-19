@@ -187,31 +187,63 @@ const Home = () => {
             </div>
           </ScrollReveal>
 
-          <div className="space-y-24">
-            {benefits.map((benefit, index) => (
-              <div key={benefit.title} className="grid lg:grid-cols-2 gap-12 items-center">
-                <ScrollReveal direction="left" delay={100}>
-                  <div className="relative">
-                    <div className="absolute -inset-4 bg-primary/20 blur-3xl rounded-full" />
-                    <img
-                      src={benefit.image}
-                      alt={benefit.title}
-                      className="relative rounded-2xl shadow-2xl w-full h-auto"
-                    />
-                  </div>
+          <div className="space-y-12">
+            {/* Testimonials */}
+            <div className="grid md:grid-cols-3 gap-6 mb-12">
+              {[
+                {
+                  quote:
+                    "When I was sick in the dorms and didn't know where to go or what to try first, Wellify walked me through my symptoms and suggested the exact campus clinic with the shortest wait — I got treated the same day.",
+                  author: "Maya, Junior",
+                },
+                {
+                  quote:
+                    "I avoided the ER for a sinus infection because Wellify showed me how to get a quick telemedicine consult and pick up the right meds nearby. It saved me time and money.",
+                  author: "Devon, Senior",
+                },
+                {
+                  quote:
+                    "Insurance was intimidating until Wellify explained what my plan covered in plain English. I finally understood my options and didn't overpay for care.",
+                  author: "Alex, Grad Student",
+                },
+              ].map((t, i) => (
+                <ScrollReveal key={i} delay={i * 100} direction="up">
+                  <Card className="p-6 bg-card/90 border-border/40 h-full">
+                    <CardContent className="p-0">
+                      <p className="text-lg text-foreground/90 italic">“{t.quote}”</p>
+                      <p className="mt-4 text-sm text-muted-foreground">— {t.author}</p>
+                    </CardContent>
+                  </Card>
                 </ScrollReveal>
+              ))}
+            </div>
 
-                <ScrollReveal direction="right" delay={200}>
-                  <div className="space-y-6">
-                    <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
-                      <benefit.icon className="w-6 h-6 text-primary" />
+            <div className="space-y-24">
+              {benefits.map((benefit, index) => (
+                <div key={benefit.title} className="grid lg:grid-cols-2 gap-12 items-center">
+                  <ScrollReveal direction="left" delay={100}>
+                    <div className="relative">
+                      <div className="absolute -inset-4 bg-primary/20 blur-3xl rounded-full" />
+                      <img
+                        src={benefit.image}
+                        alt={benefit.title}
+                        className="relative rounded-2xl shadow-2xl w-full h-auto"
+                      />
                     </div>
-                    <h3 className="text-3xl font-bold text-foreground">{benefit.title}</h3>
-                    <p className="text-lg text-muted-foreground">{benefit.description}</p>
-                  </div>
-                </ScrollReveal>
-              </div>
-            ))}
+                  </ScrollReveal>
+
+                  <ScrollReveal direction="right" delay={200}>
+                    <div className="space-y-6">
+                      <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
+                        <benefit.icon className="w-6 h-6 text-primary" />
+                      </div>
+                      <h3 className="text-3xl font-bold text-foreground">{benefit.title}</h3>
+                      <p className="text-lg text-muted-foreground">{benefit.description}</p>
+                    </div>
+                  </ScrollReveal>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
