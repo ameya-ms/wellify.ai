@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { SymptomSearch } from "@/components/SymptomSearch";
+import SymptomClassifier from "@/components/SymptomClassifier";
 
 interface Facility {
   id: string;
@@ -157,6 +158,11 @@ const Symptoms = () => {
                   <div className="relative flex justify-center text-xs uppercase">
                     <span className="bg-card px-2 text-muted-foreground">or select below</span>
                   </div>
+                </div>
+
+                {/* Symptom classifier (LLM) - placed above the symptom selection grid */}
+                <div className="mb-4">
+                  <SymptomClassifier />
                 </div>
 
                 {/* Multiselect Symptom Grid */}
