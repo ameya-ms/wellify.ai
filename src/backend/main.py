@@ -67,8 +67,76 @@ from fastapi.middleware.cors import CORSMiddleware
 import boto3
 import json
 import os
+import pandas as pd
+from pydantic import BaseModel
+import joblib
+import numpy as np
+import uvicorn
 
 app = FastAPI()
+
+model = joblib.load("models/doctor_routing_model.pkl")
+encoder = joblib.load("models/label_encoder.pkl")
+
+class PatientInput(BaseModel):
+    age: int
+    gender: int
+    symptom_code: str
+    urgency: int
+    time_of_day: int
+    wait_load_A: float
+    wait_load_B: float
+    wait_load_C: float
+    specialty_match_A: int
+    specialty_match_B: int
+    specialty_match_C: int
+
+
+# -----------------------------
+# Prediction endpoint
+# -----------------------------
+@app.post("/predict")
+def predict_center(data: PatientInput):
+    # Create a DataFrame so XGBoost can match column names correctly
+    input_df = pd.DataFrame([{
+        "age": data.age,
+        "gender": data.gender,
+        "symptom_code": data.symptom_code,   # keep as string
+        "urgency": data.urgency,
+        "time_of_day": data.time_of_day,
+        "wait_load_A": data.wait_load_A,
+        "wait_load_B": data.wait_load_B,
+        "wait_load_C": data.wait_load_C,
+        "specialty_match_A": data.specialty_match_A,
+        "specialty_match_B": data.specialty_match_B,
+        "specialty_match_C": data.specialty_match_C
+    }])
+
+    # Make prediction
+    input_df["symptom_code"] = input_df["symptom_code"].astype("category")
+    probs = model.predict_proba(input_df)[0]
+    pred_idx = np.argmax(probs)
+    pred_center = encoder.classes_[pred_idx]
+
+    return {
+        "predicted_center": pred_center,
+        "probabilities": probs.tolist()
+    }
+
+
+# -----------------------------
+# Optional home route
+# -----------------------------
+@app.get("/")
+def home():
+    return {"message": "Wellify.ai backend is running 🚀"}
+
+
+# -----------------------------
+# Run app
+# -----------------------------
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=8000)
 
 # Allow frontend requests
 app.add_middleware(
