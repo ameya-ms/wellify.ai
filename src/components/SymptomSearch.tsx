@@ -5,17 +5,18 @@ import { Input } from "@/components/ui/input";
 
 interface SymptomSearchProps {
   onSymptomChange: (symptoms: string[]) => void;
+  currentSymptoms?: string[];
 }
 
 const commonSymptoms = [
   "Fever", "Headache", "Cough", "Sore Throat", "Nausea",
   "Fatigue", "Body Aches", "Runny Nose", "Shortness of Breath",
-  "Dizziness", "Stomach Pain", "Diarrhea", "Vomiting", "Chills"
+  "Dizziness", "Stomach Pain", "Diarrhea", "Vomiting", "Chills",
+  "Broken Bone", "Swellings", "Congestion", "Sneezing", "Chest Pain"
 ];
 
-export const SymptomSearch = ({ onSymptomChange }: SymptomSearchProps) => {
+export const SymptomSearch = ({ onSymptomChange, currentSymptoms = [] }: SymptomSearchProps) => {
   const [inputValue, setInputValue] = useState("");
-  const [selectedSymptoms, setSelectedSymptoms] = useState<string[]>([]);
   const [filteredSymptoms, setFilteredSymptoms] = useState<string[]>([]);
   const [showDropdown, setShowDropdown] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -25,7 +26,7 @@ export const SymptomSearch = ({ onSymptomChange }: SymptomSearchProps) => {
       const filtered = commonSymptoms.filter(
         symptom =>
           symptom.toLowerCase().includes(inputValue.toLowerCase()) &&
-          !selectedSymptoms.includes(symptom)
+          !currentSymptoms.includes(symptom)
       );
       setFilteredSymptoms(filtered);
       setShowDropdown(filtered.length > 0);
@@ -33,12 +34,16 @@ export const SymptomSearch = ({ onSymptomChange }: SymptomSearchProps) => {
       setFilteredSymptoms([]);
       setShowDropdown(false);
     }
-  }, [inputValue, selectedSymptoms]);
+  }, [inputValue, currentSymptoms]);
 
   const addSymptom = (symptom: string) => {
-    if (!selectedSymptoms.includes(symptom)) {
-      const newSymptoms = [...selectedSymptoms, symptom];
-      setSelectedSymptoms(newSymptoms);
+    // Find the properly cased version from commonSymptoms list (case-insensitive match)
+    const properCasedSymptom = commonSymptoms.find(
+      s => s.toLowerCase() === symptom.toLowerCase()
+    ) || symptom; // If not found in list, use as-is (for custom symptoms)
+    
+    if (!currentSymptoms.includes(properCasedSymptom)) {
+      const newSymptoms = [...currentSymptoms, properCasedSymptom];
       onSymptomChange(newSymptoms);
       setInputValue("");
       setShowDropdown(false);
@@ -46,8 +51,7 @@ export const SymptomSearch = ({ onSymptomChange }: SymptomSearchProps) => {
   };
 
   const removeSymptom = (symptom: string) => {
-    const newSymptoms = selectedSymptoms.filter(s => s !== symptom);
-    setSelectedSymptoms(newSymptoms);
+    const newSymptoms = currentSymptoms.filter(s => s !== symptom);
     onSymptomChange(newSymptoms);
   };
 

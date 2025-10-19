@@ -193,6 +193,13 @@ const DoorDashOrder: React.FC<DoorDashOrderProps> = ({ itemName, itemCategory, o
             </div>
           )}
 
+          {/* No Results Message */}
+          {!loading && stores.length === 0 && searchQuery && (
+            <div className="p-4 bg-muted border border-border rounded-lg text-foreground">
+              Item not available with DoorDash. Try Instacart instead!
+            </div>
+          )}
+
           {/* Store Selection */}
           {!selectedStore && stores.length > 0 && (
             <div className="space-y-4">

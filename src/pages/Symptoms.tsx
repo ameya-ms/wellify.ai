@@ -185,9 +185,33 @@ async function fetchPrediction(symptom: string) {
             {/* Search and Symptom Selection Combined */}
             <Card className="shadow-xl border-border/50 backdrop-blur-sm">
               <CardContent className="p-6 space-y-6">
+                {/* Type Symptoms (Classifier) */}
+                <div>
+                  <SymptomClassifier onSymptomsExtracted={(extractedSymptoms) => {
+                    // Add extracted symptoms to the existing symptoms list
+                    const newSymptoms = [...symptoms];
+                    extractedSymptoms.forEach(symptom => {
+                      if (!newSymptoms.includes(symptom)) {
+                        newSymptoms.push(symptom);
+                      }
+                    });
+                    setSymptoms(newSymptoms);
+                  }} />
+                </div>
+
+                {/* Divider */}
+                <div className="relative">
+                  <div className="absolute inset-0 flex items-center">
+                    <span className="w-full border-t border-border" />
+                  </div>
+                  <div className="relative flex justify-center text-xs uppercase">
+                    <span className="bg-card px-2 text-muted-foreground">or select below</span>
+                  </div>
+                </div>
+
                 {/* Search Bar */}
                 <div className="space-y-3">
-                  <SymptomSearch onSymptomChange={setSymptoms} />
+                  <SymptomSearch onSymptomChange={setSymptoms} currentSymptoms={symptoms} />
                   
                   {/* Selected Symptoms Display */}
                   {symptoms.length > 0 && (
@@ -208,21 +232,6 @@ async function fetchPrediction(symptom: string) {
                       ))}
                     </div>
                   )}
-                </div>
-
-                {/* Divider */}
-                <div className="relative">
-                  <div className="absolute inset-0 flex items-center">
-                    <span className="w-full border-t border-border" />
-                  </div>
-                  <div className="relative flex justify-center text-xs uppercase">
-                    <span className="bg-card px-2 text-muted-foreground">or select below</span>
-                  </div>
-                </div>
-
-                {/* Symptom classifier (LLM) - placed above the symptom selection grid */}
-                <div className="mb-4">
-                  <SymptomClassifier />
                 </div>
 
                 {/* Multiselect Symptom Grid */}
@@ -300,7 +309,7 @@ async function fetchPrediction(symptom: string) {
             {/* Quick Categories */}
             <div className="space-y-4">
               <h2 className="text-xl font-semibold text-foreground text-center">
-                Or select a category
+                Or select a category to proceed
               </h2>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 {symptomCategories.map((category, index) => (

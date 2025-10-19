@@ -111,7 +111,7 @@ export default function PrescriptionCardDetails({ open, id, provider, rx }: Prop
               </div>
             </div>
 
-            {/* Action Buttons */}
+            {/* Combined Action Button */}
             <div className="flex gap-2">
               <Button
                 size="sm"
@@ -123,18 +123,6 @@ export default function PrescriptionCardDetails({ open, id, provider, rx }: Prop
               >
                 <ShoppingCart className="w-3 h-3 mr-1" />
                 Quick Buy
-              </Button>
-              <Button
-                size="sm"
-                variant="outline"
-                onClick={() => {
-                  const walgreensUrl = `https://www.walgreens.com/search/results.jsp?Ntt=${encodeURIComponent(rx.name)}`;
-                  window.open(walgreensUrl, '_blank');
-                }}
-                className="flex-1 text-xs"
-              >
-                <ExternalLink className="w-3 h-3 mr-1" />
-                Browse
               </Button>
             </div>
 
