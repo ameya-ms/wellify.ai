@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { SymptomSearch } from "@/components/SymptomSearch";
+import UberBooking from "@/components/UberBooking";
 
 interface Facility {
   id: string;
@@ -361,10 +362,19 @@ const Symptoms = () => {
                             Open in Google Maps
                           </a>
                           <div className="flex gap-3">
-                            <Button className="flex-1 bg-[hsl(0_0%_0%)] hover:bg-[hsl(0_0%_10%)] text-white">
-                              <Car className="w-4 h-4 mr-2" />
-                              Uber
-                            </Button>
+                            <UberBooking 
+                              destination={{
+                                name: facility.name,
+                                address: facility.location,
+                                latitude: facility.id === "hall-health" ? 47.6553 : 
+                                         facility.id === "uw-urgent-care" ? 47.6603 : 47.6503,
+                                longitude: facility.id === "hall-health" ? -122.3035 : 
+                                          facility.id === "uw-urgent-care" ? -122.3135 : -122.3135
+                              }}
+                              onRideBooked={(result) => {
+                                console.log('Uber ride booked:', result);
+                              }}
+                            />
                             <Button className="flex-1 bg-[hsl(330_100%_50%)] hover:bg-[hsl(330_100%_40%)] text-white">
                               <Car className="w-4 h-4 mr-2" />
                               Lyft
