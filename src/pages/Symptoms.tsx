@@ -217,7 +217,7 @@ async function fetchPrediction(symptom: string) {
                   </h3>
                   <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
                     {[
-                      "Fever", "Cough", "Headache", "Sore Throat", 
+                      "Broken Bone", "Cough", "Swellings", "Sore Throat", 
                       "Nausea", "Fatigue", "Body Aches", "Chills",
                       "Congestion", "Runny Nose", "Sneezing", "Dizziness",
                       "Shortness of Breath", "Chest Pain", "Stomach Pain"
