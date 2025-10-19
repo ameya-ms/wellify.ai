@@ -6,6 +6,7 @@ import { useState } from "react";
 import { cn } from "@/lib/utils";
 import PrescriptionCardDetails from "@/components/PrescriptionCardDetails";
 import DoorDashOrder from "@/components/DoorDashOrder";
+import WalgreensBuy from "@/components/WalgreensBuy";
 import chickenSoup from "@/assets/chicken-soup.jpg";
 import gingerTea from "@/assets/ginger-tea.jpg";
 import tissues from "@/assets/tissues.jpg";
