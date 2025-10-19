@@ -65,11 +65,13 @@ const Symptoms = () => {
     },
   ];
 
-  const handleContinue = () => {
-    if (symptoms.length > 0) {
-      setShowResults(true);
-    }
-  };
+const handleContinue = async () => {
+  if (symptoms.length > 0) {
+    await fetchPrediction(symptoms[0]); // just send the first selected symptom for now
+    setShowResults(true);
+  }
+};
+
 
   const handleCategoryClick = (category: string) => {
     setSymptoms([category]);
@@ -102,6 +104,47 @@ const Symptoms = () => {
         return "bg-muted text-muted-foreground";
     }
   };
+
+  // --- API call to backend ---
+async function fetchPrediction(symptom: string) {
+  const payload = {
+    age: 25,
+    gender: 1,
+    symptom_code: symptom.toLowerCase(),
+    urgency: 3,
+    time_of_day: 1,
+    wait_load_A: 10,
+    wait_load_B: 5,
+    wait_load_C: 12,
+    specialty_match_A: 1,
+    specialty_match_B: 0,
+    specialty_match_C: 0,
+  };
+
+  try {
+    const res = await fetch("http://127.0.0.1:8000/predict", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+
+    if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+
+    const result = await res.json();
+    console.log("✅ Prediction result:", result);
+
+    alert(`Recommended Center: ${result.predicted_center}`);
+
+    // you can store it in state to display dynamically:
+    // setRecommendedCenter(result.predicted_center);
+
+  } catch (err) {
+    console.error("❌ API call failed:", err);
+    alert("Error connecting to backend");
+  }
+}
+
+
 
   return (
     <div className="min-h-screen pt-32 pb-12">
