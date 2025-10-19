@@ -39,40 +39,178 @@ class UberService {
     this.clientSecret = import.meta.env.VITE_UBER_CLIENT_SECRET || 'yCGOjRH8b7f1Go6WC913qaAVERmoLXjza55jH4sm';
   }
 
-  // Get ride estimates from Uber
+  // Get access token for Uber API
+  private async getAccessToken(): Promise<string> {
+    try {
+      const response = await fetch('https://login.uber.com/oauth/v2/token', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: new URLSearchParams({
+          client_id: this.clientId,
+          client_secret: this.clientSecret,
+          grant_type: 'client_credentials',
+          scope: 'request'
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to get access token');
+      }
+
+      const data = await response.json();
+      return data.access_token;
+    } catch (error) {
+      console.error('Error getting Uber access token:', error);
+      throw error;
+    }
+  }
+
+  // Get ride estimates from Uber API
   async getRideEstimates(request: UberRideRequest): Promise<UberRideEstimate[]> {
     try {
-      // For demo purposes, return mock data
-      // In production, you'd make actual API calls to Uber
-      const estimates: UberRideEstimate[] = [
-        {
-          rideType: 'UberX',
-          estimatedTime: '5-8 min',
-          estimatedCost: '$8-12',
-          currency: 'USD',
-          productId: 'uberx'
-        },
-        {
-          rideType: 'Uber Comfort',
-          estimatedTime: '6-10 min',
-          estimatedCost: '$12-16',
-          currency: 'USD',
-          productId: 'comfort'
-        },
-        {
-          rideType: 'Uber Pool',
-          estimatedTime: '7-12 min',
-          estimatedCost: '$6-9',
-          currency: 'USD',
-          productId: 'pool'
-        }
-      ];
+      // First get available products
+      const products = await this.getProducts(request.pickup);
+      if (products.length === 0) {
+        return this.getMockEstimates();
+      }
 
-      return estimates;
+      // Get price estimates for each product
+      const estimates: UberRideEstimate[] = [];
+      
+      for (const product of products.slice(0, 3)) { // Limit to 3 products
+        try {
+          const priceEstimate = await this.getPriceEstimate(request, product.product_id);
+          const timeEstimate = await this.getTimeEstimate(request.pickup, product.product_id);
+          
+          estimates.push({
+            rideType: product.display_name,
+            estimatedTime: `${timeEstimate} min`,
+            estimatedCost: priceEstimate ? `$${priceEstimate.low_estimate}-${priceEstimate.high_estimate}` : 'N/A',
+            currency: 'USD',
+            productId: product.product_id
+          });
+        } catch (error) {
+          console.warn(`Failed to get estimate for ${product.display_name}:`, error);
+        }
+      }
+
+      // Fallback to mock data if no real estimates
+      return estimates.length > 0 ? estimates : this.getMockEstimates();
     } catch (error) {
       console.error('Error getting Uber estimates:', error);
+      return this.getMockEstimates();
+    }
+  }
+
+  // Get available products at pickup location
+  private async getProducts(pickup: { latitude: number; longitude: number }): Promise<any[]> {
+    try {
+      const accessToken = await this.getAccessToken();
+      const response = await fetch(
+        `https://api.uber.com/v1.2/products?latitude=${pickup.latitude}&longitude=${pickup.longitude}`,
+        {
+          headers: {
+            'Authorization': `Bearer ${accessToken}`,
+            'Accept-Language': 'en_US',
+            'Content-Type': 'application/json'
+          }
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error('Failed to get products');
+      }
+
+      const data = await response.json();
+      return data.products || [];
+    } catch (error) {
+      console.error('Error getting Uber products:', error);
       return [];
     }
+  }
+
+  // Get price estimate for a specific product
+  private async getPriceEstimate(request: UberRideRequest, productId: string): Promise<any> {
+    try {
+      const accessToken = await this.getAccessToken();
+      const response = await fetch(
+        `https://api.uber.com/v1.2/estimates/price?start_latitude=${request.pickup.latitude}&start_longitude=${request.pickup.longitude}&end_latitude=${request.destination.latitude}&end_longitude=${request.destination.longitude}`,
+        {
+          headers: {
+            'Authorization': `Bearer ${accessToken}`,
+            'Accept-Language': 'en_US',
+            'Content-Type': 'application/json'
+          }
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error('Failed to get price estimate');
+      }
+
+      const data = await response.json();
+      return data.prices?.find((price: any) => price.product_id === productId);
+    } catch (error) {
+      console.error('Error getting price estimate:', error);
+      return null;
+    }
+  }
+
+  // Get time estimate for a specific product
+  private async getTimeEstimate(pickup: { latitude: number; longitude: number }, productId: string): Promise<number> {
+    try {
+      const accessToken = await this.getAccessToken();
+      const response = await fetch(
+        `https://api.uber.com/v1.2/estimates/time?start_latitude=${pickup.latitude}&start_longitude=${pickup.longitude}&product_id=${productId}`,
+        {
+          headers: {
+            'Authorization': `Bearer ${accessToken}`,
+            'Accept-Language': 'en_US',
+            'Content-Type': 'application/json'
+          }
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error('Failed to get time estimate');
+      }
+
+      const data = await response.json();
+      const timeEstimate = data.times?.find((time: any) => time.product_id === productId);
+      return timeEstimate?.estimate || 5; // Default to 5 minutes
+    } catch (error) {
+      console.error('Error getting time estimate:', error);
+      return 5; // Default fallback
+    }
+  }
+
+  // Mock estimates as fallback
+  private getMockEstimates(): UberRideEstimate[] {
+    return [
+      {
+        rideType: 'UberX',
+        estimatedTime: '5-8 min',
+        estimatedCost: '$8-12',
+        currency: 'USD',
+        productId: 'uberx'
+      },
+      {
+        rideType: 'Uber Comfort',
+        estimatedTime: '6-10 min',
+        estimatedCost: '$12-16',
+        currency: 'USD',
+        productId: 'comfort'
+      },
+      {
+        rideType: 'Uber Pool',
+        estimatedTime: '7-12 min',
+        estimatedCost: '$6-9',
+        currency: 'USD',
+        productId: 'pool'
+      }
+    ];
   }
 
   // Book a ride with Uber

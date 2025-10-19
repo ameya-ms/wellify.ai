@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
-import { Car, MapPin, ExternalLink, Loader2 } from 'lucide-react';
-import { UberBookingResult } from '@/services/uberService';
+import { Car, Clock, DollarSign, MapPin, ExternalLink, Loader2 } from 'lucide-react';
+import { uberService, UberRideRequest, UberRideEstimate, UberBookingResult } from '@/services/uberService';
 
 interface UberBookingProps {
   destination: {
@@ -19,6 +19,8 @@ interface UberBookingProps {
 const UberBooking: React.FC<UberBookingProps> = ({ destination, onRideBooked }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [estimates, setEstimates] = useState<UberRideEstimate[]>([]);
+  const [userLocation, setUserLocation] = useState<{ latitude: number; longitude: number } | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   // Destination-specific Uber links
@@ -39,6 +41,50 @@ const UberBooking: React.FC<UberBookingProps> = ({ destination, onRideBooked }) 
     
     // Fallback to generic link
     return `https://m.uber.com/ul/?action=setPickup&pickup[latitude]=47.6553&pickup[longitude]=-122.3035&pickup[nickname]=UW%20Husky%20Union&dropoff[latitude]=${destination.latitude}&dropoff[longitude]=${destination.longitude}&dropoff[nickname]=${encodeURIComponent(destination.name)}`;
+  };
+
+  useEffect(() => {
+    if (isOpen && !userLocation) {
+      loadUserLocation();
+    }
+  }, [isOpen]);
+
+  const loadUserLocation = async () => {
+    try {
+      const location = await uberService.getCurrentLocation();
+      setUserLocation(location);
+      await loadEstimates(location);
+    } catch (error) {
+      console.error('Error getting location:', error);
+      setError('Unable to get your location. Please try again.');
+    }
+  };
+
+  const loadEstimates = async (location: { latitude: number; longitude: number }) => {
+    setLoading(true);
+    setError(null);
+
+    try {
+      const request: UberRideRequest = {
+        pickup: {
+          latitude: location.latitude,
+          longitude: location.longitude
+        },
+        destination: {
+          latitude: destination.latitude,
+          longitude: destination.longitude,
+          address: destination.address
+        }
+      };
+
+      const rideEstimates = await uberService.getRideEstimates(request);
+      setEstimates(rideEstimates);
+    } catch (error) {
+      console.error('Error loading estimates:', error);
+      setError('Failed to load ride estimates. Please try again.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleBookRide = async (rideType: string) => {
@@ -121,7 +167,56 @@ const UberBooking: React.FC<UberBookingProps> = ({ destination, onRideBooked }) 
           {loading && (
             <div className="text-center py-4">
               <Loader2 className="w-6 h-6 animate-spin mx-auto mb-2" />
-              <p className="text-sm text-muted-foreground">Opening Uber...</p>
+              <p className="text-sm text-muted-foreground">Loading Uber options...</p>
+            </div>
+          )}
+
+          {/* Real-time Uber Options */}
+          {estimates.length > 0 && (
+            <div className="space-y-3">
+              <h3 className="font-semibold">Available Uber Rides</h3>
+              <div className="grid gap-3">
+                {estimates.map((estimate, index) => (
+                  <Card key={`uber-${index}`}>
+                    <CardContent className="p-4">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-3">
+                          <div className="w-8 h-8 rounded-full bg-black flex items-center justify-center text-white text-sm">
+                            🚗
+                          </div>
+                          <div>
+                            <h4 className="font-semibold">{estimate.rideType}</h4>
+                            <div className="flex items-center gap-4 text-sm text-muted-foreground">
+                              <div className="flex items-center gap-1">
+                                <Clock className="w-4 h-4" />
+                                {estimate.estimatedTime}
+                              </div>
+                              <div className="flex items-center gap-1">
+                                <DollarSign className="w-4 h-4" />
+                                {estimate.estimatedCost}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <Button
+                          onClick={() => handleBookRide(estimate.rideType)}
+                          disabled={loading}
+                          className="bg-black hover:bg-gray-800"
+                        >
+                          {loading ? (
+                            <Loader2 className="w-4 h-4 animate-spin" />
+                          ) : (
+                            <>
+                              <ExternalLink className="w-4 h-4 mr-2" />
+                              Book
+                            </>
+                          )}
+                        </Button>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
             </div>
           )}
 
