@@ -107,9 +107,6 @@ export default function SymptomClassifier() {
 
   return (
     <Card className="border-border">
-      <CardHeader>
-        <CardTitle>AI Symptom Classifier</CardTitle>
-      </CardHeader>
       <CardContent>
         <div className="space-y-3">
           <textarea
