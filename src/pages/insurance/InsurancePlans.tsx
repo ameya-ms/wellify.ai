@@ -247,6 +247,7 @@
 
 // export default InsurancePlans;
 import { useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import { MessageSquare, Shield, Send, Building2, Ambulance, Stethoscope } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -261,6 +262,9 @@ interface Message {
 }
 
 const InsurancePlans = () => {
+  const [searchParams] = useSearchParams();
+  const selectedProvider = searchParams.get('provider') || 'Your Insurance Provider';
+  
   const [messages, setMessages] = useState<Message[]>([
     {
       id: "1",
@@ -407,6 +411,9 @@ const InsurancePlans = () => {
               <Shield className="w-6 h-6 text-primary" />
               <h2 className="text-2xl font-semibold text-foreground">Coverage by Facility</h2>
             </div>
+            <p className="text-sm text-muted-foreground">
+              Coverage is provided by <span className="font-medium text-foreground">{selectedProvider}</span>
+            </p>
 
             <Tabs defaultValue="hallHealth" className="w-full">
               <TabsList className="grid w-full grid-cols-3">

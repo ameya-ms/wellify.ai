@@ -15,6 +15,7 @@ import bcbsLogo from "@/assets/insurance/bcbs-logo.png";
 const InsuranceOverview = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedProvider, setSelectedProvider] = useState<string | null>(null);
+  const [dialogOpen, setDialogOpen] = useState(false);
 
   const insuranceProviders = [
     { name: "Premera Blue Cross", logo: bcbsLogo },
@@ -439,7 +440,7 @@ const InsuranceOverview = () => {
               </div>
 
               <div className="text-center space-y-4 pt-4">
-                <Dialog>
+                <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
                   <DialogTrigger asChild>
                     <Button variant="link" className="text-primary hover:text-primary/80">
                       See all (1,000+) providers
@@ -469,6 +470,10 @@ const InsuranceOverview = () => {
                               <Button
                                 key={carrier}
                                 variant="ghost"
+                                onClick={() => {
+                                  setSelectedProvider(carrier);
+                                  setDialogOpen(false);
+                                }}
                                 className="justify-start text-left h-auto py-2 px-3 hover:bg-primary/10"
                               >
                                 {carrier}
@@ -487,9 +492,11 @@ const InsuranceOverview = () => {
                         <CheckCircle className="w-5 h-5" />
                         <p className="font-medium">Selected: {selectedProvider}</p>
                       </div>
-                      <Button size="lg" className="hover:scale-105 transition-transform">
-                        Continue with {selectedProvider}
-                      </Button>
+                      <Link to={`/insurance/plans?provider=${encodeURIComponent(selectedProvider)}`}>
+                        <Button size="lg" className="hover:scale-105 transition-transform">
+                          Continue with {selectedProvider}
+                        </Button>
+                      </Link>
                     </div>
                   ) : (
                     <Button size="lg" variant="outline" className="hover:scale-105 transition-transform">
@@ -505,7 +512,14 @@ const InsuranceOverview = () => {
 
         {/* Coverage Highlights */}
         <div className="mb-12">
-          <h2 className="text-2xl font-semibold text-foreground mb-6">Coverage Highlights</h2>
+          <div className="mb-6">
+            <h2 className="text-2xl font-semibold text-foreground mb-2">Coverage Highlights</h2>
+            {selectedProvider && (
+              <p className="text-sm text-muted-foreground">
+                Coverage is provided by <span className="font-medium text-foreground">{selectedProvider}</span>
+              </p>
+            )}
+          </div>
           <div className="grid md:grid-cols-3 gap-6">
             {coverageHighlights.map((item, index) => (
               <Card 
