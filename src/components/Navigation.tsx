@@ -22,7 +22,7 @@ const Navigation = () => {
               <img
                 src={logo}
                 alt="Wellify logo"
-                className="h-12 md:h-16 w-auto object-contain bg-transparent ml-2"
+                className="h-24 md:h-32 w-auto object-contain bg-transparent ml-2"
               />
             <span className="sr-only">wellify.ai</span>
           </Link>
