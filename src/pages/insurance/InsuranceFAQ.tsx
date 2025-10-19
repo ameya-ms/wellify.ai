@@ -1,12 +1,12 @@
 import { HelpCircle, ChevronDown } from "lucide-react";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent } from "../../components/ui/card";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "@/components/ui/accordion";
-import { Badge } from "@/components/ui/badge";
+} from "../../components/ui/accordion";
+import { Badge } from "../../components/ui/badge";
 
 const InsuranceFAQ = () => {
   const faqCategories = [

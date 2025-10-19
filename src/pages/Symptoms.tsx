@@ -1,12 +1,12 @@
 import { useState, useRef } from "react";
 import { Clock, MapPin, Stethoscope, AlertCircle, Car, Activity, Thermometer, Heart, Brain, Plus, X } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { SymptomSearch } from "@/components/SymptomSearch";
-import SymptomClassifier from "@/components/SymptomClassifier";
-import UberBooking from "@/components/UberBooking";
-import LyftBooking from "@/components/LyftBooking";
+import { Button } from "../components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/card";
+import { Badge } from "../components/ui/badge";
+import { SymptomSearch } from "../components/SymptomSearch";
+import SymptomClassifier from "../components/SymptomClassifier";
+import UberBooking from "../components/UberBooking";
+import LyftBooking from "../components/LyftBooking";
 
 interface Facility {
   id: string;

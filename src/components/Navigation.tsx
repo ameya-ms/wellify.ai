@@ -1,10 +1,36 @@
 import { Link, useLocation } from "react-router-dom";
-import { Activity, Home, Pill, Shield } from "lucide-react";
-import { cn } from "@/lib/utils";
-import logo from "@/assets/insurance/wellify_logo.png";
+import { Activity, Home, Pill, Shield, LogIn, LogOut, User } from "lucide-react";
+import { cn } from "../lib/utils";
+import { Button } from "./ui/button";
+import { useAuth } from "../hooks/useAuth";
+import { useToast } from "../hooks/use-toast";
+import logo from "../assets/insurance/wellify_logo.png";
 
 const Navigation = () => {
   const location = useLocation();
+  const { isAuthenticated, user, signOut, loading } = useAuth();
+  const { toast } = useToast();
+
+  // Don't render navigation if not authenticated
+  if (!isAuthenticated) {
+    return null;
+  }
+
+  const handleSignOut = async () => {
+    try {
+      await signOut();
+      toast({
+        title: "Signed out successfully",
+        description: "You have been logged out of your account.",
+      });
+    } catch (error) {
+      toast({
+        title: "Error signing out",
+        description: "There was an error signing you out. Please try again.",
+        variant: "destructive",
+      });
+    }
+  };
   
   const navItems = [
     { path: "/", label: "Home", icon: Home },
@@ -44,6 +70,34 @@ const Navigation = () => {
                 <span className="font-medium">{label}</span>
               </Link>
             ))}
+            {isAuthenticated ? (
+              <div className="flex items-center space-x-2 ml-2">
+                <div className="flex items-center space-x-2 text-sm text-muted-foreground">
+                  <User className="w-4 h-4" />
+                  <span>{user?.attributes?.email || user?.username}</span>
+                </div>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={handleSignOut}
+                  className="flex items-center space-x-2"
+                >
+                  <LogOut className="w-4 h-4" />
+                  <span>Sign Out</span>
+                </Button>
+              </div>
+            ) : (
+              <Link to="/signin">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="flex items-center space-x-2 ml-2"
+                >
+                  <LogIn className="w-4 h-4" />
+                  <span>Sign In</span>
+                </Button>
+              </Link>
+            )}
           </div>
           
           <div className="md:hidden flex items-center space-x-1">
@@ -62,6 +116,26 @@ const Navigation = () => {
                 <Icon className="w-5 h-5" />
               </Link>
             ))}
+            {isAuthenticated ? (
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={handleSignOut}
+                className="p-2"
+              >
+                <LogOut className="w-5 h-5" />
+              </Button>
+            ) : (
+              <Link to="/signin">
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="p-2"
+                >
+                  <LogIn className="w-5 h-5" />
+                </Button>
+              </Link>
+            )}
           </div>
         </div>
       </div>

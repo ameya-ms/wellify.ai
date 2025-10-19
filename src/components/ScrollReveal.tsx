@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
-import { useScrollAnimation } from "@/hooks/useScrollAnimation";
-import { cn } from "@/lib/utils";
+import { useScrollAnimation } from "../hooks/useScrollAnimation";
+import { cn } from "../lib/utils";
 
 interface ScrollRevealProps {
   children: ReactNode;

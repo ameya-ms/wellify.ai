@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom";
 import { Activity, Clock, Heart, Shield, ArrowRight, Zap, CheckCircle } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { ScrollReveal } from "@/components/ScrollReveal";
-import heroImage from "@/assets/hero-image.jpg";
-import hallHealthExterior from "@/assets/hall-health-exterior.jpg";
-import studentsApp from "@/assets/students-app.jpg";
-import doctorConsultation from "@/assets/doctor-consultation.jpg";
+import { Button } from "../components/ui/button";
+import { Card, CardContent } from "../components/ui/card";
+import { ScrollReveal } from "../components/ScrollReveal";
+import heroImage from "../assets/hero-image.jpg";
+import hallHealthExterior from "../assets/hall-health-exterior.jpg";
+import studentsApp from "../assets/students-app.jpg";
+import doctorConsultation from "../assets/doctor-consultation.jpg";
 
 const Home = () => {
   const features = [

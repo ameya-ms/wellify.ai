@@ -1,16 +1,16 @@
 import { Link } from "react-router-dom";
 import { Shield, FileText, HelpCircle, Upload, CheckCircle, Plus, Search } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
+import { Button } from "../../components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "../../components/ui/card";
+import { Badge } from "../../components/ui/badge";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "../../components/ui/dialog";
+import { Input } from "../../components/ui/input";
 import { useState } from "react";
-import { cn } from "@/lib/utils";
-import uhcLogo from "@/assets/insurance/uhc-logo.png";
-import cignaLogo from "@/assets/insurance/cigna-logo.png";
-import medicareLogo from "@/assets/insurance/medicare-logo.png";
-import bcbsLogo from "@/assets/insurance/bcbs-logo.png";
+import { cn } from "../../lib/utils";
+import uhcLogo from "../../assets/insurance/uhc-logo.png";
+import cignaLogo from "../../assets/insurance/cigna-logo.png";
+import medicareLogo from "../../assets/insurance/medicare-logo.png";
+import bcbsLogo from "../../assets/insurance/bcbs-logo.png";
 
 const InsuranceOverview = () => {
   const [searchQuery, setSearchQuery] = useState("");

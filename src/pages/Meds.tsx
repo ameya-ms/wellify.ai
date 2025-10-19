@@ -1,18 +1,18 @@
 import { Package, Pill, ShoppingBag, Truck, ChevronDown } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+import { Button } from "../components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/card";
+import { Badge } from "../components/ui/badge";
 import { useState } from "react";
-import { cn } from "@/lib/utils";
-import PrescriptionCardDetails from "@/components/PrescriptionCardDetails";
-import DoorDashOrder from "@/components/DoorDashOrder";
-import WalgreensBuy from "@/components/WalgreensBuy";
-import chickenSoup from "@/assets/chicken-soup.jpg";
-import gingerTea from "@/assets/ginger-tea.jpg";
-import tissues from "@/assets/tissues.jpg";
-import thermometer from "@/assets/thermometer.jpg";
-import orangeJuice from "@/assets/orange-juice.jpg";
-import vitamins from "@/assets/vitamins.jpg";
+import { cn } from "../lib/utils";
+import PrescriptionCardDetails from "../components/PrescriptionCardDetails";
+import DoorDashOrder from "../components/DoorDashOrder";
+import WalgreensBuy from "../components/WalgreensBuy";
+import chickenSoup from "../assets/chicken-soup.jpg";
+import gingerTea from "../assets/ginger-tea.jpg";
+import tissues from "../assets/tissues.jpg";
+import thermometer from "../assets/thermometer.jpg";
+import orangeJuice from "../assets/orange-juice.jpg";
+import vitamins from "../assets/vitamins.jpg";
 
 const Meds = () => {
   const [expandedRx, setExpandedRx] = useState<string | null>(null);
