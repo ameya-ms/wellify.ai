@@ -5,6 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { SymptomSearch } from "@/components/SymptomSearch";
 import UberBooking from "@/components/UberBooking";
+import LyftBooking from "@/components/LyftBooking";
 
 interface Facility {
   id: string;
@@ -375,10 +376,19 @@ const Symptoms = () => {
                                 console.log('Uber ride booked:', result);
                               }}
                             />
-                            <Button className="flex-1 bg-[hsl(330_100%_50%)] hover:bg-[hsl(330_100%_40%)] text-white">
-                              <Car className="w-4 h-4 mr-2" />
-                              Lyft
-                            </Button>
+                            <LyftBooking 
+                              destination={{
+                                name: facility.name,
+                                address: facility.location,
+                                latitude: facility.id === "hall-health" ? 47.6553 : 
+                                         facility.id === "uw-urgent-care" ? 47.6603 : 47.6503,
+                                longitude: facility.id === "hall-health" ? -122.3035 : 
+                                          facility.id === "uw-urgent-care" ? -122.3135 : -122.3135
+                              }}
+                              onRideBooked={(result) => {
+                                console.log('Lyft ride booked:', result);
+                              }}
+                            />
                           </div>
                         </div>
                       </div>
